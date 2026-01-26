@@ -1,23 +1,23 @@
-# Business-Portal-Template
+# PowerWash Pro Website
 
 [![Built by LokiSoft](https://img.shields.io/badge/built%20by-LokiSoft-blue.svg)](https://www.lokisoft.xyz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > "Commit to the Lord whatever you do, and he will establish your plans." - Proverbs 16:3
 
-Welcome to the Business Portal Template by [LokiSoft](https://www.lokisoft.xyz)! We are an open-source loving company built on Christian values. We believe in free knowledge, community, and the love of God. This template is our gift to you, a tool to help you build your own corner of the internet.
+Welcome to the official website for PowerWash Pro, built by [LokiSoft](https://www.lokisoft.xyz) using their Business Portal Template. This website serves as a digital hub for our services, customer inquiries, and showcasing our quality work.
 
-This is a modern, responsive, and customizable webpage template for service-based businesses, built with Next.js and Tailwind CSS.
+This is a modern, responsive, and customizable website for a service-based business, built with Next.js and Tailwind CSS.
 
 ## Features
 
 -   **Modern Design:** Clean and professional design, optimized for user experience.
 -   **Responsive:** Fully responsive and mobile-first, ensuring a great look on any device.
--   **Modular Sections:** Easily configurable sections for Hero, About, Services, Gallery, Testimonials, and Contact.
+-   **Comprehensive Services:** Detailed sections for our range of lawn care services including mowing, fertilization, weed control, hedge trimming, and seasonal cleanups.
 -   **Dedicated Pages:** Includes ready-to-use pages for Services, Gallery, Pricing, FAQ, Privacy Policy, and Terms of Service.
--   **Contact Form:** Integrated API route for sending quotes/messages via Resend.
+-   **Contact Form:** Integrated API route for sending quotes/messages directly to Cale's Lawncare.
 -   **SEO Optimized:** Built with Next.js App Router for optimal search engine performance and easy metadata management.
--   **Highly Customizable:** Effortlessly change theme, content, and functionality to match your brand.
+-   **Highly Customizable:** Effortlessly change theme, content, and functionality to match Cale's Lawncare's brand.
 
 ## Tech Stack
 
@@ -70,25 +70,25 @@ This template is designed for easy customization. Here's where to find and chang
 
 ### 1. Data Management (`lib/data` directory)
 
-All content for your website, from company details to service descriptions and testimonials, is managed in the `lib/data` directory. We've adopted a modular approach for better organization:
+All content for PowerWash Pro's website, from company details to service descriptions and gallery items, is managed in the `lib/data` directory. We've adopted a modular approach for better organization:
 
 *   **`lib/data/index.ts`**: This file acts as the central hub, re-exporting all data from the individual files below. Components import from `@/lib/data`, which automatically pulls from here. You generally won't need to edit this file directly.
-*   **`lib/data/global.ts`**: Contains site-wide configurations like `companyInfo` (name, address, social links), `siteConfig` (to enable/disable pages and sections), `headerContent`, `footerContent`, `callToActionSectionContent`, and `heroSectionContent`.
-    *   **Tip**: Start here to quickly update your business's core information and control global visibility of sections.
-*   **`lib/data/about.ts`**: Content for your "About Us" section and page (`aboutSectionContent`). Includes customizable image settings (`image.src`, `image.year`, `image.line1`, `image.line2`) for the visual display.
-*   **`lib/data/services.ts`**: Defines your `Service` interface, the `services` array (details of each service), and `servicesSectionContent`.
-*   **`lib/data/testimonials.ts`**: Defines the `Testimonial` interface, the `testimonials` array, and `testimonialsSectionContent`.
+*   **`lib/data/global.ts`**: Contains site-wide configurations like `companyInfo` (name, address, contact), `siteConfig` (to enable/disable pages and sections, including individual social media toggles), `headerContent`, `footerContent`, `callToActionSectionContent`, and `heroSectionContent`.
+    *   **Tip**: Start here to quickly update PowerWash Pro's core information and control global visibility of sections and social media links.
+*   **`lib/data/about.ts`**: Content for the "About Us" section and page (`aboutSectionContent`). Includes customizable image settings (`image.src`, `image.year`, `image.line1`, `image.line2`) for the visual display.
+*   **`lib/data/services.ts`**: Defines your `Service` interface, the `services` array (details of each lawn care service), and `servicesSectionContent`.
+*   **`lib/data/testimonials.ts`**: Defines the `Testimonial` interface, the `testimonials` array, and `testimonialsSectionContent`. Note: This section is currently disabled as per client request.
 *   **`lib/data/pricing.ts`**: Defines the `PricingPlan` interface, `pricingPlans` array, `pricingPageContent`, and `individualServicesPricingContent`.
-*   **`lib/data/gallery.ts`**: Defines the `GalleryItem` interface, `galleryItems` array (your project portfolio), `galleryPageContent`, and `showcaseSectionContent`.
+*   **`lib/data/gallery.ts`**: Defines the `GalleryItem` interface, `galleryItems` array (Cale's Lawncare's project portfolio), `galleryPageContent`, and `showcaseSectionContent`.
 *   **`lib/data/faq.ts`**: Defines the `FAQItem` interface, `faqData` array, and `faqPageContent`.
 *   **`lib/data/contact.ts`**: Contains `contactSectionContent`, including form labels, placeholders, and the **critical `quoteEmailTemplate`**.
 
 **How to Edit Data:**
-Open the relevant `.ts` file in `lib/data`. Each file is heavily commented, guiding you on what each variable represents and how to modify it. Simply change the values of the exported constants to update your website's content.
+Open the relevant `.ts` file in `lib/data`. Each file is heavily commented, guiding you on what each variable represents and how to modify it. Simply change the values of the exported constants to update PowerWash Pro's website content.
 
 ### 2. Styling & Rebranding (`globals.css` and Tailwind CSS)
 
-To rebrand your website, focus on `app/globals.css`:
+To rebrand PowerWash Pro's website, focus on `app/globals.css`:
 
 *   **Color Palette:** The primary colors are defined as CSS variables at the top of `app/globals.css`. Look for variables like `--primary`, `--secondary`, `--accent`, etc. Adjust their HSL values to change the overall color scheme of your site. Tailwind CSS classes (e.g., `text-primary`, `bg-accent`) will automatically pick up these changes.
 *   **Fonts:** You can easily change the fonts by updating the `font-sans` and `font-heading` variables, which use Google Fonts by default.
@@ -107,19 +107,19 @@ Edit `app/layout.tsx` to customize your site's metadata:
 
 ### 4. Images & Media (`public` directory)
 
-All static images are stored in the `public` directory. Replace the placeholder files with your own branded assets.
+All static images are stored in the `public` directory. Replace the placeholder files with PowerWash Pro's own branded assets.
 
 #### Site-Wide Images
 
-The template includes SVG placeholder images. Replace these with your own branded assets (PNG, JPG, or WebP recommended for photos).
+The template includes SVG placeholder images. Replace these with PowerWash Pro's own branded assets (PNG, JPG, or WebP recommended for photos).
 
 | Placeholder | Replace With | Recommended Size | Description |
 |-------------|--------------|------------------|-------------|
 | `app/favicon.ico` | Your favicon | 32x32 or 48x48 | Browser tab icon. Use `.ico` format for compatibility. |
 | `public/og-image.svg` | `og-image.png` | 1200x630 | Social media preview image (Facebook, LinkedIn, Twitter). |
 | `public/about-image.svg` | `about-image.png` | 800x800 (1:1) | About section image. Set path in `lib/data/about.ts` (`image.src`). Set to `null` for animated visual. |
-| `public/map-preview.svg` | `map-preview.png` | 640x360 (16:9) | Header location dropdown - Google Maps screenshot of your business location. |
-| `public/service-area.svg` | `service-area.png` | 640x360 (16:9) | Contact section - Google Maps screenshot of your service coverage area. |
+| `public/map-preview.svg` | `map-preview.png` | 640x360 (16:9) | Header location dropdown - Google Maps screenshot of PowerWash Pro's business location. |
+| `public/service-area.svg` | `service-area.png` | 640x360 (16:9) | Contact section - Google Maps screenshot of PowerWash Pro's service coverage area. |
 
 **Note:** After replacing SVG placeholders with PNG/JPG files, update the file references in:
 -   `lib/data/about.ts` (about-image via `image.src`)
@@ -128,11 +128,11 @@ The template includes SVG placeholder images. Replace these with your own brande
 
 #### Gallery Images
 
-Gallery images are stored in `public/gallery/` and referenced in `lib/data/gallery.ts`. The template includes 12 SVG placeholder images (`project-1.svg` through `project-12.svg`).
+Gallery images are stored in `public/gallery/` and referenced in `lib/data/gallery.ts`.
 
 | Placeholder Pattern | Replace With | Recommended Size | Aspect Ratio | Description |
 |---------------------|--------------|------------------|--------------|-------------|
-| `project-1.svg` through `project-12.svg` | `project-1.jpg` etc. | 800x600 or larger | 4:3 | Project/portfolio images for gallery and showcase. |
+| `project-1.svg` through `project-12.svg` | `project-1.jpg` etc. | 800x600 or larger | 4:3 | PowerWash Pro's project/portfolio images for gallery and showcase. |
 
 **To add gallery images:**
 1.  Place your images in the `public/gallery/` directory (PNG, JPG, or WebP)
@@ -160,7 +160,7 @@ export const galleryItems: GalleryItem[] = [
 #### How to Create Map Images
 
 1.  Go to [Google Maps](https://www.google.com/maps)
-2.  Search for your business address (for `map-preview.png`) or zoom out to show your service area (for `service-area.png`)
+2.  Search for PowerWash Pro's business address (for `map-preview.png`) or zoom out to show the service area (for `service-area.png`)
 3.  Take a screenshot at the recommended aspect ratio (16:9)
 4.  Save as PNG in the `public` directory
 
@@ -234,7 +234,7 @@ The contact form uses the [Resend API](https://resend.com/) to send emails.
     This command will add the component's code to your `components/ui` directory, allowing you to fully customize it.
 3.  **Integrate:** Import the component into your desired React component and use it as needed. This approach provides maximum flexibility and ownership over your UI.
 
-## Next Steps for Your Business (Post-Deployment Checklist)
+## Next Steps for PowerWash Pro's (Post-Deployment Checklist)
 
 Once your website is live, consider these crucial steps:
 

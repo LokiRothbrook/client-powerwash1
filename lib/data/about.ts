@@ -38,7 +38,7 @@ export const aboutSectionContent = {
   ],
   image: {
     /** Path to the about section image. Set to null to use the animated visual instead. */
-    src: "/about-image.svg",
+    src: "/branding/aboutus-placeholder.webp",
     /** The main number/stat displayed prominently (e.g., "10+" for years) */
     year: "10+",
     /** First line of text below the year (e.g., "Years of Excellence") */

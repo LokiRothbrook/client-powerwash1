@@ -43,13 +43,29 @@ import {
   TrendingUp,
   Shield,
   Zap,
+  Scissors,
+  Leaf,
+  Bug,
+  Sprout,
+  TreeDeciduous,
+  Wind,
+  Sun,
+  Home,
+  Building,
+  Clock,
+  Sparkles,
+  CloudRain,
+  Droplets,
+  Building2,
+  Trees,
+  Car,
 
   // ========================================
   // COMMON ICONS - Uncomment as needed
   // ========================================
 
   // -- General --
-  Home,
+  // Home,
   // Settings,
   // Search,
   // Filter,
@@ -123,7 +139,6 @@ import {
   // Upload,
   // Share,
   // Link,
-  // Scissors,
   // Pencil,
   // Trash,
 
@@ -135,12 +150,10 @@ import {
   // EyeOff,
 
   // -- Weather --
-  // Sun,
   // Moon,
   // Cloud,
-  CloudRain,
-  Droplets,
-  // Wind,
+  // CloudRain,
+  // Droplet,
 
   // -- Tech & Devices --
   // Monitor,
@@ -163,7 +176,7 @@ import {
 
   // -- Business --
   // Building,
-  Building2,
+  // Building2,
   // Store,
   // ShoppingCart,
   // ShoppingBag,
@@ -192,11 +205,9 @@ import {
   // Gift,
   // Sparkles,
   // Flame,
-  // Leaf,
-  Trees,
   // Coffee,
   // Utensils,
-  Car,
+  // Car,
   // Plane,
   // Bike,
 
@@ -219,6 +230,22 @@ const iconMap: Record<string, LucideIcon> = {
   TrendingUp,
   Shield,
   Zap,
+  Scissors,
+  Leaf,
+  Bug,
+  Sprout,
+  TreeDeciduous,
+  Wind,
+  Sun,
+  Home,
+  Building,
+  Clock,
+  Sparkles,
+  CloudRain,
+  Droplets,
+  Building2,
+  Trees,
+  Car,
 
   // ========================================
   // COMMON ICONS - Uncomment as needed
@@ -226,7 +253,7 @@ const iconMap: Record<string, LucideIcon> = {
   // ========================================
 
   // -- General --
-  Home,
+  // Home,
   // Settings,
   // Search,
   // Filter,
@@ -300,7 +327,6 @@ const iconMap: Record<string, LucideIcon> = {
   // Upload,
   // Share,
   // Link,
-  // Scissors,
   // Pencil,
   // Trash,
 
@@ -312,12 +338,10 @@ const iconMap: Record<string, LucideIcon> = {
   // EyeOff,
 
   // -- Weather --
-  // Sun,
   // Moon,
   // Cloud,
-  CloudRain,
-  Droplets,
-  // Wind,
+  // CloudRain,
+  // Droplet,
 
   // -- Tech & Devices --
   // Monitor,
@@ -340,7 +364,7 @@ const iconMap: Record<string, LucideIcon> = {
 
   // -- Business --
   // Building,
-  Building2,
+  // Building2,
   // Store,
   // ShoppingCart,
   // ShoppingBag,
@@ -369,11 +393,9 @@ const iconMap: Record<string, LucideIcon> = {
   // Gift,
   // Sparkles,
   // Flame,
-  // Leaf,
-  Trees,
   // Coffee,
   // Utensils,
-  Car,
+  // Car,
   // Plane,
   // Bike,
 }

@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
   title: {
     // The default title for the site (used on the homepage).
-    default: `${companyInfo.name} | Professional Services`,
+    default: `${companyInfo.name} | Professional Powerwashing Services`,
     // A template for child pages. `%s` will be replaced by the page's specific title.
     template: `%s | ${companyInfo.name}`,
   },
@@ -87,11 +87,51 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Structured data for LocalBusiness
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "PowerWash Pro's",
+    "description": "Professional Powerwashing Services, We keep your property looking it's best",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Macomb",
+      "addressRegion": "IL",
+      "postalCode": "61455",
+      "streetAddress": "Serving Macomb and Rushville areas"
+    },
+    "telephone": "(111) 222-3333",
+    "email": "powerwashpro@lokisoft.xyz",
+    "openingHours": [
+      "Mo-Sa 07:00-19:00",
+      "Su 09:00-17:00"
+    ],
+    "priceRange": "$35-$125",
+    "areaServed": [
+      {
+        "@type": "Place",
+        "name": "Macomb, IL"
+      },
+      {
+        "@type": "Place",
+        "name": "Rushville, IL"
+      }
+    ],
+    "serviceArea": "Macomb and Rushville, IL",
+    "sameAs": [
+      "facekbooklink"
+    ]
+  };
+
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
         <Analytics />
       </body>

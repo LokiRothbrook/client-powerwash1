@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Sparkles, Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react"
 
@@ -11,10 +12,18 @@ function XIcon({ className }: { className?: string }) {
     </svg>
   )
 }
-import { services, companyInfo, footerContent } from "@/lib/data"
+import { services, companyInfo, footerContent, siteConfig } from "@/lib/data"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+
+  // Define social media platforms and their corresponding Lucide icons
+  const socialPlatforms = [
+    { id: 'facebook', Icon: Facebook },
+    { id: 'instagram', Icon: Instagram },
+    { id: 'x', Icon: XIcon },
+    { id: 'youtube', Icon: Youtube },
+  ];
 
   return (
     <footer className="relative bg-card overflow-hidden">
@@ -44,42 +53,25 @@ export function Footer() {
               {companyInfo.tagline}. {footerContent.taglineSuffix}
             </p>
             <div className="flex gap-3">
-              <motion.a
-                href={companyInfo.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href={companyInfo.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href={companyInfo.social.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <XIcon className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href={companyInfo.social.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Youtube className="w-5 h-5" />
-              </motion.a>
+              {socialPlatforms.map((platform) => {
+                const socialData = siteConfig.socialMedia[platform.id as keyof typeof siteConfig.socialMedia];
+                if (socialData && socialData.enabled) {
+                  const IconComponent = platform.Icon;
+                  return (
+                    <motion.a
+                      key={platform.id}
+                      href={socialData.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                    >
+                      <IconComponent className="w-5 h-5" />
+                    </motion.a>
+                  );
+                }
+                return null;
+              })}
             </div>
           </div>
 
@@ -112,15 +104,22 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">{footerContent.columns.quickLinks.title}</h3>
             <ul className="space-y-3">
-              {footerContent.columns.quickLinks.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+              {footerContent.columns.quickLinks.links
+                .filter(link => {
+                  if (link.href === '/pricing') return siteConfig.pages.pricing.enabled;
+                  if (link.href === '/gallery') return siteConfig.pages.gallery.enabled;
+                  if (link.href === '/faq') return siteConfig.pages.faq.enabled;
+                  return true;
+                })
+                .map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
               ))}
             </ul>
           </div>
@@ -129,15 +128,17 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">{footerContent.columns.contact.title}</h3>
             <ul className="space-y-4">
-              <li>
-                <a
-                  href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  <Phone className="w-5 h-5 text-primary" />
-                  {companyInfo.phone}
-                </a>
-              </li>
+              {siteConfig.showPhoneNumber && (
+                <li>
+                  <a
+                    href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
+                    className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    <Phone className="w-5 h-5 text-primary" />
+                    {companyInfo.phone}
+                  </a>
+                </li>
+              )}
               <li>
                 <a
                   href={`mailto:${companyInfo.email}`}
@@ -147,12 +148,14 @@ export function Footer() {
                   {companyInfo.email}
                 </a>
               </li>
-              <li>
-                <div className="flex items-start gap-3 text-muted-foreground text-sm">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  {companyInfo.address}
-                </div>
-              </li>
+              {siteConfig.showMapIcon && (
+                <li>
+                  <div className="flex items-start gap-3 text-muted-foreground text-sm">
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    {companyInfo.address}
+                  </div>
+                </li>
+              )}
             </ul>
 
             <div className="mt-6 p-4 rounded-xl glass-card">

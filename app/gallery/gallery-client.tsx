@@ -3,11 +3,12 @@
 import * as React from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
 import { galleryItems } from "@/lib/data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CtaSection } from "@/components/sections/cta"
+import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
 
 // Memoized outside component since galleryItems is static
 const categories = ["All", ...Array.from(new Set(galleryItems.map(item => item.category)))]
@@ -26,17 +27,17 @@ export default function GalleryPageClient() {
 
   const currentIndex = selectedImage ? filteredItems.findIndex(item => item.id === selectedImage.id) : -1
 
-  const handlePrev = () => {
+  const handlePrev = React.useCallback(() => {
     if (currentIndex > 0) {
       setSelectedImage(filteredItems[currentIndex - 1])
     }
-  }
+  }, [currentIndex, filteredItems])
 
-  const handleNext = () => {
+  const handleNext = React.useCallback(() => {
     if (currentIndex < filteredItems.length - 1) {
       setSelectedImage(filteredItems[currentIndex + 1])
     }
-  }
+  }, [currentIndex, filteredItems])
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,7 +48,8 @@ export default function GalleryPageClient() {
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [selectedImage, currentIndex])
+  }, [selectedImage, handlePrev, handleNext])
+
 
   return (
     <>
@@ -174,78 +176,16 @@ export default function GalleryPageClient() {
         </section>
 
         {/* Lightbox */}
-        <AnimatePresence>
-          {selectedImage && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex items-center justify-center p-4"
-              onClick={() => setSelectedImage(null)}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-              >
-                <X className="w-6 h-6 text-foreground" />
-              </button>
+        <Lightbox
+          images={filteredItems}
+          selectedImage={selectedImage}
+          onClose={() => setSelectedImage(null)}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          currentIndex={currentIndex}
+          totalImages={filteredItems.length}
+        />
 
-              {/* Navigation */}
-              {currentIndex > 0 && (
-                <button
-                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6 text-foreground" />
-                </button>
-              )}
-              {currentIndex < filteredItems.length - 1 && (
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6 text-foreground" />
-                </button>
-              )}
-
-              {/* Image Content */}
-              <motion.div
-                key={selectedImage.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="max-w-5xl w-full"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative aspect-video rounded-2xl overflow-hidden glass-card mb-6">
-                  {/* Project Image */}
-                  <Image
-                    src={selectedImage.image}
-                    alt={selectedImage.title}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1280px) 100vw, 1280px"
-                    priority
-                  />
-                </div>
-
-                <div className="text-center">
-                  <h2 className="text-foreground text-2xl font-bold mb-2">{selectedImage.title}</h2>
-                  <p className="text-muted-foreground mb-2">{selectedImage.description}</p>
-                  <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm">
-                    {selectedImage.category}
-                  </span>
-                </div>
-
-                {/* Counter */}
-                <div className="text-center mt-6 text-muted-foreground text-sm">
-                  {currentIndex + 1} / {filteredItems.length}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* CTA Section */}
         <CtaSection />

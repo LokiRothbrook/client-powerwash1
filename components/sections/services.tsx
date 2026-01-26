@@ -5,8 +5,8 @@ import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { services, servicesSectionContent } from "@/lib/data"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { getIcon } from "@/lib/icon-map"
 
 export function ServicesSection() {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -44,9 +44,8 @@ export function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
-            const ServiceIcon = getIcon(service.iconName)
             return (
               <motion.div
                 key={service.id}
@@ -55,35 +54,42 @@ export function ServicesSection() {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
               >
                 <Link href={`/services/${service.id}`} className="group block h-full">
-                  <div className="relative h-full p-6 rounded-2xl glass-card hover:border-primary/50 transition-all duration-300 overflow-hidden">
+                  <div className="relative h-full rounded-2xl glass-card hover:border-primary/50 transition-all duration-300 overflow-hidden">
                     {/* Hover Glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    {/* Icon */}
+                    {/* Image */}
                     <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="relative w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      className="relative w-full h-32"
                     >
-                      {ServiceIcon && <ServiceIcon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />}
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover"
+                      />
                     </motion.div>
 
                     {/* Content */}
-                    <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {service.shortDescription}
-                    </p>
+                    <div className="p-6">
+                      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        {service.shortDescription}
+                      </p>
 
-                    {/* Price & Arrow */}
-                    <div className="flex items-center justify-between mt-auto">
-                      <span className="text-sm font-medium text-primary">{service.price}</span>
-                      <motion.div
-                        className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors"
-                        whileHover={{ x: 3 }}
-                      >
-                        <ArrowRight className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
-                      </motion.div>
+                      {/* Price & Arrow */}
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-sm font-medium text-primary">{service.price}</span>
+                        <motion.div
+                          className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors"
+                          whileHover={{ x: 3 }}
+                        >
+                          <ArrowRight className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
+                        </motion.div>
+                      </div>
                     </div>
 
                     {/* Bottom Accent Line */}

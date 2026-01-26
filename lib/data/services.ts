@@ -78,7 +78,7 @@ export const services: Service[] = [
       "Improves curb appeal instantly",
       "Eco-friendly cleaning solutions"
     ],
-    image: "/services/service-1.svg",
+    image: "/services/house-wash-placeholder.webp",
     price: "From $199"
   },
   {
@@ -94,7 +94,7 @@ export const services: Service[] = [
       "Garage floor cleaning available",
       "Sealing services optional"
     ],
-    image: "/services/service-2.svg",
+    image: "/services/concrete-placeholder.webp",
     price: "From $149"
   },
   {
@@ -110,7 +110,7 @@ export const services: Service[] = [
       "Prep for staining or sealing",
       "Extends deck lifespan"
     ],
-    image: "/services/service-3.svg",
+    image: "/services/deck-placeholder.webp",
     price: "From $175"
   },
   {
@@ -126,7 +126,7 @@ export const services: Service[] = [
       "Improves energy efficiency",
       "All roofing materials welcome"
     ],
-    image: "/services/service-4.svg",
+    image: "/services/roof-placeholder.webp",
     price: "From $299"
   },
   {
@@ -142,7 +142,7 @@ export const services: Service[] = [
       "Prevents water damage",
       "Inspect for repairs needed"
     ],
-    image: "/services/service-5.svg",
+    image: "/services/gutter-placeholder.webp",
     price: "From $125"
   },
   {
@@ -158,7 +158,7 @@ export const services: Service[] = [
       "Graffiti removal available",
       "Flexible scheduling options"
     ],
-    image: "/services/service-6.svg",
+    image: "/services/commercial-placeholder.webp",
     price: "Custom Quote"
   }
 ];

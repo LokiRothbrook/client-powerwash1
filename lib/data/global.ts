@@ -54,12 +54,6 @@ export const companyInfo = {
   email: "contact@powerwashpro.com",
   address: "123 Main Street, Pittsfield, MA 01201",
   hours: "Mon-Fri: 7AM-6PM | Sat: 8AM-4PM",
-  social: {
-    facebook: "https://facebook.com/powerwashpro",
-    instagram: "https://instagram.com/powerwashpro",
-    x: "https://x.com/powerwashpro",
-    youtube: "https://youtube.com/@powerwashpro"
-  }
 };
 
 // ============================================================================
@@ -75,6 +69,9 @@ export const companyInfo = {
  * - Set `enabled: true` to show a page or section, or `false` to hide it.
  * - `showIndividualServicesPricing`: Toggle the display of the individual
  *   services pricing section on the pricing page.
+ * - `showPhoneNumber`: Toggle the display of the phone number in header and footer.
+ * - `showMapIcon`: Toggle the display of the map icon/directions in header and footer.
+ * - `showGetFreeQuoteButton`: Toggle the display of the get free quote button.
  */
 export const siteConfig = {
   pages: {
@@ -86,7 +83,7 @@ export const siteConfig = {
     },
     pricing: {
       enabled: false,
-      showIndividualServicesPricing: false,
+      showIndividualServicesPricing: true, // New toggle for individual services pricing section
     },
     faq: {
       enabled: true,
@@ -112,6 +109,29 @@ export const siteConfig = {
       enabled: true,
     },
   },
+  // Social Media Configuration
+  socialMedia: {
+    facebook: {
+      enabled: true,
+      href: "https://www.facebook.com/share/powerwashpro",
+    },
+    instagram: {
+      enabled: false,
+      href: "https://instagram.com/powerwashpro",
+    },
+    x: {
+      enabled: false,
+      href: "https://x.com/powerwashpro",
+    },
+    youtube: {
+      enabled: false,
+      href: "https://youtube.com/@powerwashpro",
+    },
+  },
+  // Header and footer display toggles
+  showPhoneNumber: true,
+  showMapIcon: true, // Set to false as requested
+  showGetFreeQuoteButton: true,
 };
 
 // ============================================================================
@@ -136,6 +156,7 @@ export const headerContent = {
     { label: "Home", href: "/#" },
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services", hasDropdown: true },
+    { label: "Pricing", href: "/pricing" },
     { label: "Gallery", href: "/gallery" },
     { label: "FAQ", href: "/faq" },
   ],
@@ -184,6 +205,7 @@ export const footerContent = {
       links: [
         { label: "Home", href: "/#" },
         { label: "About Us", href: "/#about" },
+        { label: "Pricing", href: "/pricing" },
         { label: "Gallery", href: "/gallery" },
         { label: "Testimonials", href: "/#testimonials" },
         { label: "Contact", href: "/#contact" }
@@ -250,8 +272,8 @@ export const callToActionSectionContent = {
  */
 export const heroSectionContent = {
   title: {
-    line1: "Professional",
-    line2: "Power Washing"
+    line1: "Professional Powerwashing",
+    line2: "Services"
   },
   subtitle: "Restore your property's beauty with the Pittsfield Area's premier power washing service. From homes to businesses, we deliver spotless results every time.",
   buttons: {
@@ -260,7 +282,7 @@ export const heroSectionContent = {
       href: "/#contact"
     },
     secondary: {
-      text: "Explore Services",
+      text: "Our Services",
       href: "/services"
     }
   },

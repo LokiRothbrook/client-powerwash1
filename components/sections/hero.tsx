@@ -3,8 +3,9 @@
 import * as React from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Leaf } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { heroSectionContent } from "@/lib/data"
 
 function RainBackground() {
@@ -198,7 +199,10 @@ export function HeroSection() {
                     flex items-center justify-center mb-6
                     group-hover:scale-110 transition-transform duration-300
                   `}>
-                    <card.icon className="w-7 h-7 text-primary" />
+                    {(() => {
+                      const Icon = card.icon; // card.icon is already the component
+                      return Icon ? <Icon className="w-7 h-7 text-primary" /> : null;
+                    })()}
                   </div>
 
                   {/* Card Title and Subtitle */}
