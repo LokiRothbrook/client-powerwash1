@@ -50,11 +50,37 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
     notFound()
   }
 
+  // Service structured data
+  const serviceStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": service.title,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "PowerWash Pro's"
+    },
+    "description": service.description,
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "priceCurrency": "USD",
+        "price": service.price.replace(/[^\d]/g, '') // Extract numeric price
+      }
+    }
+  };
+
   return (
-    <ServicePageContent
-      service={service}
-      prevService={prevService}
-      nextService={nextService}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceStructuredData) }}
+      />
+      <ServicePageContent
+        service={service}
+        prevService={prevService}
+        nextService={nextService}
+      />
+    </>
   )
 }

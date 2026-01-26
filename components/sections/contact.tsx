@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle, Loader2, Navigation } from "lucide-react"
-import { companyInfo, services, contactSectionContent } from "@/lib/data"
+import { companyInfo, services, contactSectionContent, siteConfig } from "@/lib/data"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,13 +16,13 @@ import { formatPhoneNumber } from "@/lib/utils"
 const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(companyInfo.address)}`
 
 const contactInfo = [
-  {
+  ...(siteConfig.showPhoneNumber ? [{
     icon: Phone,
     label: "Phone",
     value: companyInfo.phone,
     href: `tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`,
     external: false,
-  },
+  }] : []),
   {
     icon: Mail,
     label: "Email",
@@ -30,13 +30,13 @@ const contactInfo = [
     href: `mailto:${companyInfo.email}`,
     external: false,
   },
-  {
+  ...(siteConfig.showMapIcon ? [{
     icon: MapPin,
     label: "Address",
     value: companyInfo.address,
     href: googleMapsUrl,
     external: true,
-  },
+  }] : []),
   {
     icon: Clock,
     label: "Hours",
@@ -44,7 +44,7 @@ const contactInfo = [
     href: "#",
     external: false,
   },
-]
+].filter(Boolean)
 
 export function ContactSection() {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -195,15 +195,15 @@ export function ContactSection() {
               className="mt-8 aspect-video rounded-2xl glass-card overflow-hidden relative"
             >
               <Image
-                src="/service-area.svg"
+                src="/branding/service-area.png"
                 alt={`${companyInfo.name} service area map`}
                 fill
-                className="object-cover"
+                className="object-fill"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
               {/* Overlay with service area label */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end justify-center pb-4">
-                <p className="text-sm text-muted-foreground px-4 text-center">{contactSectionContent.contactInfo.mapPlaceholder}</p>
+              <div className="absolute inset-0 flex items-end justify-center pb-4">
+                <p className="text-sm text-muted-foreground px-4 text-center">Serving Pittsfield, And the surrounding area.</p>
               </div>
             </motion.div>
           </motion.div>

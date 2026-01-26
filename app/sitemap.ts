@@ -14,12 +14,16 @@ interface StaticPageConfigItem {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Last content update date (based on file modification times)
+  const lastContentUpdate = new Date('2026-01-25');
+
   const staticPagesConfig: StaticPageConfigItem[] = [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1, condition: true },
-    { url: `${BASE_URL}/services`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9, condition: true },
-    { url: `${BASE_URL}/gallery`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.gallery.enabled },
-    { url: `${BASE_URL}/pricing`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.pricing.enabled },
-    { url: `${BASE_URL}/faq`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7, condition: siteConfig.pages.faq.enabled },
+    { url: BASE_URL, lastModified: lastContentUpdate, changeFrequency: 'weekly', priority: 1, condition: true },
+    { url: `${BASE_URL}/services`, lastModified: lastContentUpdate, changeFrequency: 'weekly', priority: 0.9, condition: true },
+    { url: `${BASE_URL}/gallery`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.gallery.enabled },
+    { url: `${BASE_URL}/pricing`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.pricing.enabled },
+    { url: `${BASE_URL}/faq`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.7, condition: siteConfig.pages.faq.enabled },
+    { url: `${BASE_URL}/about`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.about.enabled },
   ];
 
   const staticPages: MetadataRoute.Sitemap = staticPagesConfig
@@ -34,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${BASE_URL}/services/${service.id}`,
-    lastModified: new Date(),
+    lastModified: lastContentUpdate,
     changeFrequency: 'weekly',
     priority: 0.7,
   }));

@@ -29,14 +29,14 @@ export default function TermsOfServicePage() {
                 Welcome to the website of {companyInfo.name}. These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website and its content (the &quot;Website&quot;). By accessing or using the Website, you signify that you have read, understood, and agree to be bound by these Terms. If you do not agree with these Terms, please do not use the Website.
               </p>
               <p className="mb-4">
-                Please note that these Terms of Service apply only to your use of the Website. If you engage {companyInfo.name} for professional services, a separate written agreement will govern that client relationship.
+                Please note that these Terms of Service apply only to your use of the Website. If you engage {companyInfo.name} for professional Powerwashing services, a separate written agreement will govern that client relationship.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">2. Description of Website Services</h2>
               <p className="mb-4">
-                The {companyInfo.name} Website provides information about our company, the professional services we offer, and allows users to contact us for inquiries or quote requests. The content on this Website is for informational purposes only.
+                The {companyInfo.name} Website provides information about our company, {companyInfo.name}, a leading provider of professional Powerwashing services in Pittsfield, and the surrounding areas. We offer a comprehensive range of services. The content on this Website is for informational purposes only.
               </p>
             </section>
 
@@ -75,14 +75,14 @@ export default function TermsOfServicePage() {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">6. Governing Law</h2>
               <p className="mb-4">
-                These Terms of Service shall be governed by and construed in accordance with the laws of [Your State/Country] (Note: Replace this placeholder with the applicable state/country in your `lib/data.ts` or directly in this file), without regard to its conflict of law principles.
+                These Terms of Service shall be governed by and construed in accordance with the laws of Illinois, without regard to its conflict of law principles.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">7. Changes to Terms</h2>
               <p className="mb-4">
-                We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Service at any time and for any reason. We will alert you about any changes by updating the &quot;Last Updated&quot; date of these Terms of Service (January 19, 2026), and you waive any right to receive specific notice of each such change.
+                We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Service at any time and for any reason. We will alert you about any changes by updating the &quot;Last Updated&quot; date of these Terms of Service (January 25, 2026), and you waive any right to receive specific notice of each such change.
               </p>
             </section>
 

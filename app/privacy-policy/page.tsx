@@ -32,10 +32,10 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">2. Information We Collect</h2>
-              <p className="mb-4">We collect information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services, when you participate in activities on the Website, or otherwise when you contact us (e.g., through our contact or quote request forms).</p>
+              <p className="mb-4">We collect information that you voluntarily provide to us when you express an interest in obtaining information about our Powerwashing services, when you participate in activities on the Website, or otherwise when you contact us (e.g., through our contact or quote request forms).</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  <strong>Personal Data:</strong> Name, email address, phone number, and any other information you choose to provide in your messages. This is collected solely via our contact or quote request forms.
+                  <strong>Personal Data:</strong> We may collect personal identification information such as your name, email address, phone number, specific service interest, and any other details you choose to provide within your message when you fill out our contact or quote request forms.
                 </li>
                 <li>
                   <strong>Anonymous Usage Data (Vercel Analytics):</strong> We use Vercel Analytics to collect anonymous, non-personal data about website usage, such as page views, unique visitors, and referral sources. This helps us understand how our website is performing and improve user experience. Vercel Analytics may use cookies or similar technologies for this purpose, but this data does not identify you personally.
@@ -45,18 +45,22 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">3. How We Use Your Information</h2>
-              <p className="mb-4">We use the information we collect to:</p>
+              <p className="mb-4">We use the information we collect from you to:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Process your inquiries and provide you with quotes or services.</li>
-                <li>Communicate with you regarding your requests or services.</li>
-                <li>Analyze anonymous usage trends (via Vercel Analytics) to improve the efficiency and operation of the Website.</li>
+                <li>Provide you with accurate quotes for our Powerwashing services.</li>
+                <li>Communicate with you effectively regarding your inquiries and service requests.</li>
+                <li>Deliver and manage the services you have requested from us.</li>
+                <li>Analyze anonymous usage trends (via Vercel Analytics) to improve the functionality and user experience of our Website.</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">4. Disclosure of Your Information</h2>
-              <p className="mb-4">We do not share personal information collected through our forms with third parties, except as described below:</p>
+              <p className="mb-4">We do not sell, trade, or otherwise transfer your personal identification information to outside parties. We only disclose personal information collected through our forms with third parties as described below:</p>
               <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  <strong>Service Providers:</strong> We may share your information with third-party service providers who perform services for us or on our behalf, including email delivery services to manage communications. These service providers are provided with only the information necessary to perform their specific functions and are not authorized to use or disclose your personal information for their own marketing or other purposes.
+                </li>
                 <li>
                   <strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.
                 </li>
@@ -69,7 +73,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">5. Data Security</h2>
               <p className="mb-4">
-                We use administrative, technical, and physical security measures to help protect the information you provide to us. While we have taken reasonable steps to secure this information, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
+                We use administrative, technical, and physical security measures to help protect the information you provide to us. While we have taken reasonable steps to secure this information, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission over the Internet or method of electronic storage can be guaranteed against any interception or other type of misuse.
               </p>
             </section>
 
@@ -102,7 +106,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">8. Changes to This Privacy Policy</h2>
               <p className="mb-4">
-                We may update this Privacy Policy from time to time. The updated version will be indicated by an updated &quot;Last Updated&quot; date and the updated version will be effective as soon as it is accessible. We encourage you to review this Privacy Policy frequently to be informed of how we are protecting your information.
+                We may update this Privacy Policy from time to time. The updated version will be indicated by an updated &quot;Last Updated&quot; date (January 25, 2026), and the updated version will be effective as soon as it is accessible. We encourage you to review this Privacy Policy frequently to be informed of how we are protecting your information.
               </p>
             </section>
 
@@ -113,8 +117,6 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="mt-2">
                 {companyInfo.name}
-                <br />
-                {companyInfo.address}
                 <br />
                 {companyInfo.email}
                 <br />

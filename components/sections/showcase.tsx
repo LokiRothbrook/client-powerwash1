@@ -4,9 +4,10 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, Eye, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight, Eye, X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { galleryItems, showcaseSectionContent } from "@/lib/data"
 import { Button } from "@/components/ui/button"
+import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
 
 export function ShowcaseSection() {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -87,7 +88,7 @@ export function ShowcaseSection() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className={`${sizes[index]} relative group cursor-pointer`}
-                onClick={() => setSelectedImage(item)}
+                onClick={() => { setSelectedImage(item); }}
               >
                 <div className="absolute inset-0 rounded-2xl overflow-hidden glass-card">
                   {/* Project Image */}
@@ -135,12 +136,11 @@ export function ShowcaseSection() {
                     <motion.div
                       className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                     >
-                      <h3 className="text-foreground text-lg sm:text-xl font-bold mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-2">
-                        {item.description}
-                      </p>
+                      <div className="bg-white/80 py-2 px-4 rounded-lg w-fit">
+                        <h3 className="text-primary text-lg sm:text-xl font-bold">
+                          {item.title}
+                        </h3>
+                      </div>
                     </motion.div>
                   </div>
 
@@ -169,77 +169,15 @@ export function ShowcaseSection() {
       </div>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-            >
-              <X className="w-6 h-6 text-foreground" />
-            </button>
-
-            {/* Navigation */}
-            {currentIndex > 0 && (
-              <button
-                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-              >
-                <ChevronLeft className="w-6 h-6 text-foreground" />
-              </button>
-            )}
-            {currentIndex < showcaseItems.length - 1 && (
-              <button
-                onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"
-              >
-                <ChevronRight className="w-6 h-6 text-foreground" />
-              </button>
-            )}
-
-            {/* Image Content */}
-            <motion.div
-              key={selectedImage.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="max-w-5xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative aspect-video rounded-2xl overflow-hidden glass-card mb-6">
-                <Image
-                  src={selectedImage.image}
-                  alt={selectedImage.title}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  priority
-                />
-              </div>
-
-              <div className="text-center">
-                <h2 className="text-foreground text-2xl font-bold mb-2">{selectedImage.title}</h2>
-                <p className="text-muted-foreground mb-2">{selectedImage.description}</p>
-                <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm">
-                  {selectedImage.category}
-                </span>
-              </div>
-
-              {/* Counter */}
-              <div className="text-center mt-6 text-muted-foreground text-sm">
-                {currentIndex + 1} / {showcaseItems.length}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Lightbox
+        images={showcaseItems}
+        selectedImage={selectedImage}
+        onClose={() => setSelectedImage(null)}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        currentIndex={currentIndex}
+        totalImages={showcaseItems.length}
+      />
     </section>
   )
 }
