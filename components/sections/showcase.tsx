@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, Eye, X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
+import { ArrowRight, Eye } from "lucide-react"
 import { galleryItems, showcaseSectionContent } from "@/lib/data"
 import { Button } from "@/components/ui/button"
 import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
@@ -95,7 +95,7 @@ export function ShowcaseSection() {
                 className={`${sizes[index]} relative group cursor-pointer`}
                 onClick={() => { setSelectedImage(item); }}
               >
-                <div className="absolute inset-0 rounded-2xl overflow-hidden glass-card skeleton-shimmer">
+                <div className="absolute inset-0 rounded-2xl overflow-hidden border border-primary skeleton-shimmer">
                   {/* Project Image */}
                   <Image
                     src={item.image}
@@ -138,7 +138,7 @@ export function ShowcaseSection() {
                     <motion.div
                       className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                     >
-                      <div className="backdrop-blur-md bg-black/20 border border-white/10 py-2 px-4 rounded-2xl w-fit">
+                      <div className="backdrop-blur-md bg-black/20 border border-primary/30 py-2 px-4 rounded-2xl w-fit">
                         <h3 className="text-white text-lg sm:text-xl font-bold">
                           {item.title}
                         </h3>
@@ -147,7 +147,7 @@ export function ShowcaseSection() {
                   </div>
 
                   {/* Border Glow Effect */}
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/10 group-hover:ring-primary/50 transition-all duration-300" />
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-primary/50 transition-all duration-300" />
                 </div>
               </motion.div>
             )

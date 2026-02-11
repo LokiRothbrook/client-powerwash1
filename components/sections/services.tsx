@@ -70,7 +70,7 @@ export function ServicesSection() {
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                 >
                   <Link href={`/services/${service.id}`} className="group block h-full">
-                    <div className="relative h-full rounded-2xl glass-card hover:border-primary/50 transition-all duration-300 overflow-hidden">
+                    <div className="relative h-full rounded-2xl glass-card hover:border-primary/30 transition-all duration-300 overflow-hidden">
                       {/* Hover Glow */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

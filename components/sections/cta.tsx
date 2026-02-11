@@ -15,7 +15,7 @@ export function CtaSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative p-12 rounded-3xl glass-card border border-primary/20 shadow-2xl shadow-primary/20 overflow-hidden"
+          className="relative p-12 rounded-3xl glass-card border border-primary/30 shadow-2xl shadow-primary/20 overflow-hidden"
         >
           {/* Subtle gradient overlay for depth */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />

@@ -77,7 +77,7 @@ export default function PricingPageClient() {
                   <div className={`
                     relative h-full p-8 rounded-3xl transition-all duration-500 overflow-hidden
                     ${plan.highlighted
-                      ? 'glass-card border-primary shadow-2xl shadow-primary/10'
+                      ? 'glass-card border border-primary shadow-2xl shadow-primary/10'
                       : 'glass-card hover:border-primary/30'
                     }
                   `}>

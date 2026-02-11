@@ -3,7 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
+import { ZoomIn } from "lucide-react"
 import { galleryItems } from "@/lib/data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -78,7 +78,7 @@ export default function GalleryPageClient() {
               transition={{ delay: 0.1 }}
               className="text-5xl sm:text-6xl font-bold mb-6"
             >
-              <span className="gradient-text">Project Gallery</span>
+              <span className="gradient-text">Before & After Results</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -93,8 +93,9 @@ export default function GalleryPageClient() {
         </section>
 
         {/* Filter & Gallery */}
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-12 relative">
+          <div className="absolute inset-0 water-pattern" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Category Filter */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -149,7 +150,7 @@ export default function GalleryPageClient() {
                     onClick={() => setSelectedImage(item)}
                   >
                     <div className={`
-                      relative w-full glass-card skeleton-shimmer
+                      relative w-full border border-primary skeleton-shimmer overflow-hidden rounded-2xl
                       ${index % 5 === 0 ? 'aspect-square' : 'aspect-[4/3]'}
                     `}>
                       {/* Project Image */}
@@ -167,11 +168,11 @@ export default function GalleryPageClient() {
                           <motion.div
                             initial={{ scale: 0 }}
                             whileHover={{ scale: 1.1 }}
-                            className="w-14 h-14 rounded-full backdrop-blur-md bg-black/20 border border-white/10 flex items-center justify-center mb-4"
+                            className="w-14 h-14 rounded-full backdrop-blur-md bg-black/20 border border-primary/30 flex items-center justify-center mb-4"
                           >
                             <ZoomIn className="w-7 h-7 text-white" />
                           </motion.div>
-                          <div className="backdrop-blur-md bg-black/20 border border-white/10 py-2 px-4 rounded-2xl">
+                          <div className="backdrop-blur-md bg-black/20 border border-primary/30 py-2 px-4 rounded-2xl">
                             <h3 className="text-white font-semibold text-center text-lg">
                               {item.title}
                             </h3>
@@ -180,12 +181,12 @@ export default function GalleryPageClient() {
                       </div>
 
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4 px-3 py-1 rounded-2xl backdrop-blur-md bg-black/20 border border-white/10 text-white text-xs font-medium">
+                      <div className="absolute top-4 left-4 px-3 py-1 rounded-2xl backdrop-blur-md bg-black/20 border border-primary/30 text-white text-xs font-medium">
                         {item.category}
                       </div>
 
                       {/* Border Glow Effect */}
-                      <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/10 group-hover:ring-primary/50 transition-all duration-300" />
+                      <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-primary/50 transition-all duration-300" />
                     </div>
                   </motion.div>
                 ))}

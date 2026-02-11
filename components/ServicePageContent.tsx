@@ -59,11 +59,12 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
       <Header />
-      <main className="pt-20">
+      <main className="pt-15">
         {/* Hero Section */}
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative p-5 overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 water-pattern" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-accent/10" />
           <motion.div
             className="absolute top-20 right-20 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]"
             animate={{ scale: [1, 1.2, 1] }}
@@ -75,7 +76,7 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
             transition={{ duration: 10, repeat: Infinity }}
           />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 max-w-7xl mx-auto pt-5 px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -166,7 +167,7 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
                 transition={{ delay: 0.2 }}
                 className="relative"
               >
-                <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 relative overflow-hidden glass-card skeleton-shimmer">
+                <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 relative overflow-hidden border border-primary skeleton-shimmer">
                   <Image src={service.image} alt={service.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
 
                   {/* Floating Elements */}

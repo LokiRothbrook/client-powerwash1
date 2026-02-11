@@ -10,14 +10,10 @@ import {
   Menu,
   X,
   ChevronDown,
-  Droplets,
-  Sparkles,
-  Facebook,
-  Instagram,
-  Youtube,
   MapPin,
   Navigation,
 } from "lucide-react"
+import { Facebook, Instagram, Youtube } from "lucide-react"
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -236,7 +232,7 @@ export function Header() {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[700px] p-6 rounded-2xl glass-card shadow-2xl bg-card/80"
                     >
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rotate-45 bg-card border-l border-t border-border" />
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rotate-45 bg-card border border-primary/30" />
                       <div className="relative">
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="text-lg font-semibold">{headerContent.servicesDropdown.title}</h3>
@@ -260,7 +256,7 @@ export function Header() {
                                 <Link
                                   href={`/services/${service.id}`}
                                   onClick={() => setIsServicesOpen(false)}
-                                  className="group relative block h-24 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 skeleton-shimmer"
+                                  className="group relative block h-24 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 skeleton-shimmer border border-primary"
                                 >
                                   {/* Background Image */}
                                   <Image
@@ -340,9 +336,9 @@ export function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full right-0 mt-2 w-72 p-4 rounded-2xl glass-card shadow-2xl backdrop-blur-xl bg-card/80"
+                      className="absolute top-full right-0 mt-2 w-72 p-4 rounded-2xl glass-card shadow-2xl backdrop-blur-xl bg-card/80 border border-primary/30"
                     >
-                      <div className="absolute -top-3 right-4 w-6 h-6 rotate-45 bg-card border-l border-t border-border" />
+                      <div className="absolute -top-3 right-4 w-6 h-6 rotate-45 bg-card border border-primary/30" />
                       <div className="relative">
                         <h3 className="text-sm font-semibold mb-3">{headerContent.locationDropdown.title}</h3>
 
@@ -438,7 +434,7 @@ export function Header() {
                               key={service.id}
                               href={`/services/${service.id}`}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="group relative block h-20 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 skeleton-shimmer"
+                              className="group relative block h-20 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 skeleton-shimmer border border-primary"
                             >
                               <Image
                                 src={service.image}

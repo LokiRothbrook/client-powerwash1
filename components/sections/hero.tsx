@@ -7,7 +7,6 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { heroSectionContent } from "@/lib/data"
-import { getIcon } from "@/lib/icon-map"
 
 function RainBackground() {
   // Generate rain drops only on client to avoid hydration mismatch
@@ -103,7 +102,7 @@ export function HeroSection() {
       className="relative overflow-hidden"
     >
       {/* Image Hero Area */}
-      <div className="relative min-h-screen flex items-center justify-center bg-[oklch(0.20_0.05_145)]">
+      <div className="relative min-h-screen flex items-center justify-center bg-[oklch(0.14_0.02_230)]">
         {/* Background Image */}
         <Image
           src="/branding/cover.png"
@@ -138,7 +137,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-white font-medium max-w-2xl w-fit mx-auto mb-8 px-6 py-3 rounded-2xl backdrop-blur-md bg-black/20 border border-white/10"
+              className="text-xl text-white font-medium max-w-2xl w-fit mx-auto mb-8 px-6 py-3 rounded-2xl backdrop-blur-md bg-black/20 border border-primary"
             >
               {heroSectionContent.subtitle}
             </motion.p>
@@ -149,15 +148,16 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Button asChild size="lg" className="text-base px-8 glow-blue">
+              <Button asChild size="lg" className="group text-base px-8 glow-blue">
                 <Link href={heroSectionContent.buttons.primary.href}>
                   {heroSectionContent.buttons.primary.text}
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild size="lg" className="text-base px-8 glow-blue">
+              <Button asChild size="lg" className="group text-base px-8 glow-blue">
                 <Link href={heroSectionContent.buttons.secondary.href}>
                   {heroSectionContent.buttons.secondary.text}
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </motion.div>

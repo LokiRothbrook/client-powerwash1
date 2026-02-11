@@ -49,7 +49,7 @@ import { Shield, Award, Clock, Sparkles } from "lucide-react"; // Only for hero 
  */
 export const companyInfo = {
   name: "Pike Pressure Washing",
-  tagline: "The Pittsfield Area's premier power washing company. Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
+  tagline: "The Pittsfield Area's premier power washing company",
   phone: "(555) 123-4567",
   email: "contact@powerwashpro.com",
   address: "123 Main Street, Pittsfield, MA 01201",
@@ -207,7 +207,7 @@ export const headerContent = {
  *   very bottom bar of the footer (e.g., Privacy Policy, Terms of Service).
  */
 export const footerContent = {
-  taglineSuffix: "The Pittsfield Area's premier power washing company. Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
+  taglineSuffix: "Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
   columns: {
     services: {
       title: "Our Services",

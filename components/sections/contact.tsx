@@ -229,7 +229,7 @@ export function ContactSection() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="flex items-start gap-4 p-4 rounded-xl glass-card hover:border-primary/50 transition-all group shadow-lg"
+                  className="flex items-start gap-4 p-4 rounded-xl glass-card hover:border-primary/30 transition-all group shadow-lg"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                     <info.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
@@ -247,7 +247,7 @@ export function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-8 aspect-video rounded-2xl glass-card overflow-hidden relative shadow-lg border border-primary"
+              className="mt-8 aspect-video rounded-2xl overflow-hidden relative shadow-lg border border-primary"
             >
               <Image
                 src="/branding/service-area.png"

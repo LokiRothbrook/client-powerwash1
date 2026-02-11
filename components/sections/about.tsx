@@ -35,7 +35,7 @@ export function AboutSection() {
               <div className="absolute inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl" />
 
               {/* Main Visual */}
-              <div className="relative h-full rounded-3xl overflow-hidden">
+              <div className="relative h-full rounded-3xl overflow-hidden border border-primary/30">
                 {/* Background Image or Gradient */}
                 {aboutSectionContent.image.src ? (
                   <Image

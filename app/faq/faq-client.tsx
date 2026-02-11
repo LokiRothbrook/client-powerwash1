@@ -45,7 +45,10 @@ export default function FaqClient() {
           </div>
         </section>
 
-        <FaqSection showHeader={false} />
+        <div className="relative">
+          <div className="absolute inset-0 water-pattern" />
+          <FaqSection showHeader={false} />
+        </div>
 
         {/* CTA Section */}
         <CtaSection />

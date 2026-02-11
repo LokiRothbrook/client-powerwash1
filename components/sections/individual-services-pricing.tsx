@@ -41,7 +41,7 @@ export function IndividualServicesPricingSection() {
                 transition={{ delay: index * 0.05 }}
               >
                 <Link href={`/services/${service.id}`} className="group block h-full">
-                  <div className="h-full p-6 rounded-2xl glass-card hover:border-primary/50 transition-all">
+                  <div className="h-full p-6 rounded-2xl glass-card border border-primary/30 transition-all">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
                       {ServiceIcon && <ServiceIcon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />}
                     </div>

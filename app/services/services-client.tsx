@@ -46,8 +46,9 @@ export default function ServicesClient() {
         </section>
 
         {/* Services Grid */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 relative">
+          <div className="absolute inset-0 water-pattern" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {services.length === 0 ? (
               <div className="text-center py-16">
                 <p className="text-lg text-muted-foreground">We are currently updating our service offerings. Please check back later.</p>
@@ -56,7 +57,7 @@ export default function ServicesClient() {
             <div className="grid md:grid-cols-2 gap-8">
               {services.map((service) => (
                 <Link href={`/services/${service.id}`} key={service.id} className="group block h-full">
-                  <div className="relative h-full rounded-2xl glass-card hover:border-primary/50 transition-all duration-500 overflow-hidden">
+                  <div className="relative h-full rounded-2xl glass-card hover:border-primary transition-all duration-500 overflow-hidden">
                     <div className="relative w-full h-48 skeleton-shimmer">
                       <Image
                         src={service.image}
