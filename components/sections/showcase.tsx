@@ -69,6 +69,11 @@ export function ShowcaseSection() {
         </div>
 
         {/* Bento Grid Layout */}
+        {showcaseItems.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-lg text-muted-foreground">Our project gallery is being updated. Check back soon to see our latest work.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
           {showcaseItems.map((item, index) => {
             // Create varied sizes for bento effect
@@ -90,7 +95,7 @@ export function ShowcaseSection() {
                 className={`${sizes[index]} relative group cursor-pointer`}
                 onClick={() => { setSelectedImage(item); }}
               >
-                <div className="absolute inset-0 rounded-2xl overflow-hidden glass-card">
+                <div className="absolute inset-0 rounded-2xl overflow-hidden glass-card skeleton-shimmer">
                   {/* Project Image */}
                   <Image
                     src={item.image}
@@ -99,9 +104,6 @@ export function ShowcaseSection() {
                     className="object-cover"
                     sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
                   />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
 
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
@@ -136,8 +138,8 @@ export function ShowcaseSection() {
                     <motion.div
                       className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                     >
-                      <div className="bg-white/80 py-2 px-4 rounded-lg w-fit">
-                        <h3 className="text-primary text-lg sm:text-xl font-bold">
+                      <div className="backdrop-blur-md bg-black/20 border border-white/10 py-2 px-4 rounded-2xl w-fit">
+                        <h3 className="text-white text-lg sm:text-xl font-bold">
                           {item.title}
                         </h3>
                       </div>
@@ -151,6 +153,7 @@ export function ShowcaseSection() {
             )
           })}
         </div>
+        )}
 
         {/* CTA */}
         <motion.div

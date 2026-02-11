@@ -20,6 +20,7 @@ export default function PricingPageClient() {
         <section className="relative py-24 overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 water-pattern" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-accent/10" />
           <motion.div
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]"
             animate={{ scale: [1, 1.1, 1] }}
@@ -49,6 +50,11 @@ export default function PricingPageClient() {
         {/* Pricing Plans */}
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {pricingPlans.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-lg text-muted-foreground">Pricing information is being updated. Please contact us for a quote.</p>
+              </div>
+            ) : (
             <div className="grid md:grid-cols-3 gap-8 items-start">
               {pricingPlans.map((plan, index) => (
                 <motion.div
@@ -117,6 +123,7 @@ export default function PricingPageClient() {
                 </motion.div>
               ))}
             </div>
+            )}
           </div>
         </section>
 

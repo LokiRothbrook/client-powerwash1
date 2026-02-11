@@ -1,15 +1,44 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { companyInfo } from "@/lib/data"
+import { companyInfo, seoConfig } from "@/lib/data"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Terms of Service",
-  description: "Understand the terms and conditions governing your use of our services.",
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+export const metadata: Metadata = {
+  title: seoConfig.pages.termsOfService.title,
+  description: seoConfig.pages.termsOfService.description,
+  openGraph: {
+    url: '/terms-of-service',
+  },
 }
 
 export default function TermsOfServicePage() {
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${BASE_URL}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Terms of Service",
+        "item": `${BASE_URL}/terms-of-service`
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
       <Header />
       <main className="relative py-24 lg:py-32">
         <div className="absolute inset-0 water-pattern" />

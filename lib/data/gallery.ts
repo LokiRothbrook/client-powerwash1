@@ -108,6 +108,6 @@ export const galleryItems: GalleryItem[] = [
  * - `description`: A brief summary of the gallery page content (important for SEO).
  */
 export const galleryPageContent = {
-  title: "Project Gallery",
+  title: "Our Results",
   description: "Browse our gallery of power washing transformations. See the dramatic before and after results we achieve for homes and businesses throughout the Pittsfield area.",
 };

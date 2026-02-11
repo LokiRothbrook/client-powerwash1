@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: galleryPageContent.title,
   description: galleryPageContent.description,
+  openGraph: {
+    url: '/gallery',
+  },
 };
 
 export default function GalleryPage() {

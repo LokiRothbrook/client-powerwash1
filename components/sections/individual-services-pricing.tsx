@@ -24,6 +24,11 @@ export function IndividualServicesPricingSection() {
           </p>
         </motion.div>
 
+        {services.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-lg text-muted-foreground">Service pricing is being updated. Please contact us for details.</p>
+          </div>
+        ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const ServiceIcon = getIcon(service.iconName)
@@ -50,6 +55,7 @@ export function IndividualServicesPricingSection() {
             )
           })}
         </div>
+        )}
       </div>
     </section>
   )

@@ -103,6 +103,11 @@ export function TestimonialsSection() {
         </div>
 
         {/* Infinite Scroll Carousel */}
+        {testimonials.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-lg text-muted-foreground">Customer testimonials coming soon.</p>
+          </div>
+        ) : (
         <div className="relative">
           {/* Gradient Masks */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -126,6 +131,7 @@ export function TestimonialsSection() {
             </div>
           </motion.div>
         </div>
+        )}
 
         {/* Trust Indicators */}
         <motion.div

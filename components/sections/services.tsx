@@ -44,62 +44,81 @@ export function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
+        {(() => {
+          const displayedServices = services.slice(0, 6);
+          const count = displayedServices.length;
+
+          if (count === 0) {
             return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                <Link href={`/services/${service.id}`} className="group block h-full">
-                  <div className="relative h-full rounded-2xl glass-card hover:border-primary/50 transition-all duration-300 overflow-hidden">
-                    {/* Hover Glow */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="text-center py-16">
+                <p className="text-lg text-muted-foreground">We are currently updating our service offerings. Please check back later.</p>
+              </div>
+            );
+          }
 
-                    {/* Image */}
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="relative w-full h-32"
-                    >
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </motion.div>
+          return (
+            <div className="flex flex-wrap justify-center gap-6">
+              {displayedServices.map((service, index) => (
+                <React.Fragment key={service.id}>
+                  {count === 4 && index === 2 && (
+                    <div className="hidden lg:block lg:basis-full lg:h-0 lg:-my-3" aria-hidden="true" />
+                  )}
+                  <motion.div
+                    className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                >
+                  <Link href={`/services/${service.id}`} className="group block h-full">
+                    <div className="relative h-full rounded-2xl glass-card hover:border-primary/50 transition-all duration-300 overflow-hidden">
+                      {/* Hover Glow */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    {/* Content */}
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        {service.shortDescription}
-                      </p>
+                      {/* Image */}
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        className="relative w-full h-32 skeleton-shimmer"
+                      >
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </motion.div>
 
-                      {/* Price & Arrow */}
-                      <div className="flex items-center justify-between mt-auto">
-                        <span className="text-sm font-medium text-primary">{service.price}</span>
-                        <motion.div
-                          className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors"
-                          whileHover={{ x: 3 }}
-                        >
-                          <ArrowRight className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
-                        </motion.div>
+                      {/* Content */}
+                      <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          {service.shortDescription}
+                        </p>
+
+                        {/* Price & Arrow */}
+                        <div className="flex items-center justify-between mt-auto">
+                          <span className="text-sm font-medium text-primary">{service.price}</span>
+                          <motion.div
+                            className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors"
+                            whileHover={{ x: 3 }}
+                          >
+                            <ArrowRight className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
+                          </motion.div>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Bottom Accent Line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  </div>
-                </Link>
-              </motion.div>
-            )
-          })}
-        </div>
+                      {/* Bottom Accent Line */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    </div>
+                  </Link>
+                </motion.div>
+                </React.Fragment>
+              ))}
+            </div>
+          );
+        })()}
 
         {/* CTA */}
         <motion.div
@@ -108,7 +127,7 @@ export function ServicesSection() {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg" variant="outline" className="group glass">
+          <Button asChild size="lg" className="group">
             <Link href={servicesSectionContent.button.href}>
               {servicesSectionContent.button.text}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

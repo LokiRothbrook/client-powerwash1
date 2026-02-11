@@ -10,3 +10,4 @@ export * from "./pricing";
 export * from "./gallery";
 export * from "./faq";
 export * from "./contact";
+export * from "./seo";

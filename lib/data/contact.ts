@@ -93,19 +93,19 @@ export const contactSectionContent = {
       <h3>Customer Information</h3>
       <ul>
         <li><strong>Name:</strong> {{firstName}} {{lastName}}</li>
-        <li><strong>Email:</b> {{email}}</li>
+        <li><strong>Email:</strong> {{email}}</li>
         <li><strong>Phone:</strong> {{phone}}</li>
       </ul>
 
       <h3>Service Requested</h3>
       <p>{{service}}</p>
 
-      <h3>Property Details / Message</h3>
+      <h3>Message</h3>
       <p>{{message}}</p>
 
       <hr />
       <p style="color: #666; font-size: 12px;">
-        This email was sent from the PowerWash Pro website contact form.
+        This email was sent from the Pike Pressure Washing website contact form.
       </p>
     `,
   }

@@ -44,6 +44,7 @@ export function AboutSection() {
                     fill
                     className="object-cover"
                     priority
+                    sizes="(max-width: 1024px) 100vw, 512px"
                   />
                 ) : (
                   <>

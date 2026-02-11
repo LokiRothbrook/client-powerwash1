@@ -184,3 +184,16 @@ export const servicesSectionContent = {
     href: "/services"
   }
 };
+
+/**
+ * @const servicesPageContent
+ * An object containing the content for the main services page.
+ *
+ * === How to Customize ===
+ * - `title`: The main heading for the services page.
+ * - `subtitle`: The descriptive text below the main heading.
+ */
+export const servicesPageContent = {
+  title: "Our Services",
+  subtitle: "From individuals to businesses, we offer comprehensive services tailored to your unique needs.",
+};

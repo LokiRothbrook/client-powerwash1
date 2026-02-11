@@ -10,7 +10,7 @@ import {
   Phone,
   Star,
 } from "lucide-react"
-import { services } from "@/lib/data"
+import { services, siteConfig, companyInfo } from "@/lib/data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -118,13 +118,15 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
                   transition={{ delay: 0.3 }}
                   className="flex items-center gap-6 mb-8"
                 >
-                  <div className="text-3xl font-bold text-primary">{service.price}</div>
-                  <div className="flex items-center gap-1 text-accent">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
-                    ))}
-                    <span className="ml-2 text-sm text-muted-foreground">5.0 (120+ reviews)</span>
-                  </div>
+                  <div className="text-3xl font-bold text-primary text-center">{service.price}</div>
+                  {siteConfig.showStarsOnServicePage && (
+                    <div className="flex items-center gap-1 text-accent">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Star key={i} className="w-5 h-5 fill-current" />
+                      ))}
+                      <span className="ml-2 text-sm text-muted-foreground">5.0 (120+ reviews)</span>
+                    </div>
+                  )}
                 </motion.div>
 
                 <motion.div
@@ -139,11 +141,20 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="glass">
-                    <a href="tel:5559876543">
-                      <Phone className="w-5 h-5 mr-2" />
+                  <Button asChild size="lg">
+                    <motion.a
+                      href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <motion.div
+                        animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+                      >
+                        <Phone className="w-5 h-5 mr-2" />
+                      </motion.div>
                       Call Now
-                    </a>
+                    </motion.a>
                   </Button>
                 </motion.div>
               </div>
@@ -155,8 +166,8 @@ export function ServicePageContent({ service, prevService, nextService }: Servic
                 transition={{ delay: 0.2 }}
                 className="relative"
               >
-                <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 relative overflow-hidden glass-card">
-                  <Image src={service.image} alt={service.title} fill className="object-cover" />
+                <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 relative overflow-hidden glass-card skeleton-shimmer">
+                  <Image src={service.image} alt={service.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
 
                   {/* Floating Elements */}
                   <motion.div

@@ -3,7 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, Loader2, ZoomIn, ZoomOut } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react"
 import { GalleryItem } from "@/lib/data/gallery"
 import { useSwipeable } from "react-swipeable" // For swipe functionality
 
@@ -164,7 +164,7 @@ export function Lightbox({
         >
           <div
             ref={imageRef}
-            className="relative w-full h-full rounded-2xl overflow-hidden glass-card flex items-center justify-center cursor-zoom-in"
+            className={`relative w-full h-full rounded-2xl overflow-hidden glass-card flex items-center justify-center cursor-zoom-in ${isLoadingImage ? 'skeleton-shimmer' : ''}`}
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -172,9 +172,6 @@ export function Lightbox({
             onMouseLeave={handleMouseUp} // End drag if mouse leaves
             style={{ cursor: zoomLevel > 1 && !isDragging ? 'grab' : zoomLevel > 1 && isDragging ? 'grabbing' : 'zoom-in' }}
           >
-            {isLoadingImage && (
-              <Loader2 className="w-12 h-12 text-primary animate-spin absolute" />
-            )}
             <Image
               src={selectedImage.image}
               alt={selectedImage.title}

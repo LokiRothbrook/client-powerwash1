@@ -112,5 +112,5 @@ export const faqData: FAQItem[] = [
  */
 export const faqPageContent = {
   title: "Frequently Asked Questions",
-  description: "Have questions about power washing? Find answers to common questions about our services, process, pricing, and what to expect when you hire PowerWash Pro.",
+  description: "Have questions about power washing? Find answers to common questions about our services, process, pricing, and what to expect when you hire Pike Pressure Washing.",
 };
