@@ -345,7 +345,7 @@ export function Header() {
                         {/* Map Preview */}
                         <div className="aspect-video rounded-xl bg-primary/5 border border-border overflow-hidden relative mb-3">
                           <Image
-                            src="/map-preview.svg"
+                            src="/branding/map-preview.png"
                             alt={`Map showing ${companyInfo.name} location`}
                             fill
                             className="object-cover"

@@ -12,6 +12,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
 import { formatPhoneNumber } from "@/lib/utils"
+import { Lightbox } from "@/components/lightbox"
+import { GalleryItem } from "@/lib/data/gallery"
+import { ZoomIn } from "lucide-react"
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
@@ -67,6 +70,16 @@ export function ContactSection() {
     service: "",
     message: "",
   })
+  const [mapLightboxOpen, setMapLightboxOpen] = React.useState(false)
+
+  // Service area map as a gallery item for the lightbox
+  const serviceAreaMapItem: GalleryItem = {
+    id: 1,
+    title: "Service Area Map",
+    category: "Map",
+    image: "/branding/service-area.png",
+    description: `${companyInfo.name} service area`
+  }
 
   const renderTurnstile = React.useCallback(() => {
     if (
@@ -247,7 +260,8 @@ export function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-8 aspect-video rounded-2xl overflow-hidden relative shadow-lg border border-primary"
+              className="mt-8 aspect-video rounded-2xl overflow-hidden relative shadow-lg border border-primary cursor-pointer group"
+              onClick={() => setMapLightboxOpen(true)}
             >
               <Image
                 src="/branding/service-area.png"
@@ -256,8 +270,14 @@ export function ContactSection() {
                 className="object-fill"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-all duration-300 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-full backdrop-blur-md bg-black/20 border border-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ZoomIn className="w-7 h-7 text-white" />
+                </div>
+              </div>
               {/* Overlay with service area label */}
-              <div className="absolute inset-0 flex items-end justify-center pb-4">
+              <div className="absolute inset-0 flex items-end justify-center pb-4 pointer-events-none">
                 <p className="text-sm text-muted-foreground px-4 text-center">Serving Pittsfield, And the surrounding area.</p>
               </div>
             </motion.div>
@@ -416,6 +436,17 @@ export function ContactSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Service Area Map Lightbox */}
+      <Lightbox
+        images={[serviceAreaMapItem]}
+        selectedImage={mapLightboxOpen ? serviceAreaMapItem : null}
+        onClose={() => setMapLightboxOpen(false)}
+        onPrev={() => {}}
+        onNext={() => {}}
+        currentIndex={0}
+        totalImages={1}
+      />
     </section>
   )
 }
