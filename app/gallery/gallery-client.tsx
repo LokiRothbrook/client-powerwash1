@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer"
 import { CtaSection } from "@/components/sections/cta"
 import { Lightbox } from "@/components/lightbox"
 import { Button } from "@/components/ui/button"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 // Memoized outside component since galleryItems is static
 const categories = ["All", ...Array.from(new Set(galleryItems.map(item => item.category)))]
@@ -18,6 +19,7 @@ export default function GalleryPageClient() {
   const [selectedCategory, setSelectedCategory] = React.useState("All")
   const [selectedImage, setSelectedImage] = React.useState<typeof galleryItems[0] | null>(null)
   const [visibleCount, setVisibleCount] = React.useState(12)
+  const [sliderPositions, setSliderPositions] = React.useState<Record<number, number>>({})
 
   // Memoize filtered items to prevent recalculation on every render
   const filteredItems = React.useMemo(
@@ -147,20 +149,31 @@ export default function GalleryPageClient() {
                       relative group cursor-pointer overflow-hidden rounded-2xl
                       ${index % 5 === 0 ? 'md:col-span-2 md:row-span-2' : ''}
                     `}
-                    onClick={() => setSelectedImage(item)}
+                    onClick={item.beforeImage ? undefined : () => setSelectedImage(item)}
                   >
                     <div className={`
                       relative w-full border border-primary skeleton-shimmer overflow-hidden rounded-2xl
                       ${index % 5 === 0 ? 'aspect-square' : 'aspect-[4/3]'}
                     `}>
-                      {/* Project Image */}
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        sizes={index % 5 === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                      />
+                      {/* Project Image or Before/After Slider */}
+                      {item.beforeImage ? (
+                        <BeforeAfterSlider
+                          beforeImage={item.beforeImage}
+                          afterImage={item.image}
+                          alt={item.title}
+                          initialPosition={sliderPositions[item.id] ?? 50}
+                          onPositionChange={(pos) => setSliderPositions(prev => ({ ...prev, [item.id]: pos }))}
+                          onImageClick={() => setSelectedImage(item)}
+                        />
+                      ) : (
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          sizes={index % 5 === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                        />
+                      )}
 
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-all duration-300">
@@ -217,6 +230,8 @@ export default function GalleryPageClient() {
           onNext={handleNext}
           currentIndex={currentIndex}
           totalImages={filteredItems.length}
+          sliderPosition={selectedImage ? sliderPositions[selectedImage.id] ?? 50 : 50}
+          onSliderPositionChange={(pos) => selectedImage && setSliderPositions(prev => ({ ...prev, [selectedImage.id]: pos }))}
         />
 
 

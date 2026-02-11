@@ -5,7 +5,8 @@ import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react"
 import { GalleryItem } from "@/lib/data/gallery"
-import { useSwipeable } from "react-swipeable" // For swipe functionality
+import { useSwipeable } from "react-swipeable"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 interface LightboxProps {
   images: GalleryItem[]
@@ -15,6 +16,8 @@ interface LightboxProps {
   onNext: () => void
   currentIndex: number
   totalImages: number
+  sliderPosition?: number
+  onSliderPositionChange?: (position: number) => void
 }
 
 export function Lightbox({
@@ -25,6 +28,8 @@ export function Lightbox({
   onNext,
   currentIndex,
   totalImages,
+  sliderPosition,
+  onSliderPositionChange,
 }: LightboxProps) {
   const [isLoadingImage, setIsLoadingImage] = React.useState(true)
   const [zoomLevel, setZoomLevel] = React.useState(1)
@@ -164,35 +169,48 @@ export function Lightbox({
         >
           <div
             ref={imageRef}
-            className={`relative w-full h-full rounded-2xl overflow-hidden glass-card flex items-center justify-center cursor-zoom-in ${isLoadingImage ? 'skeleton-shimmer' : ''}`}
+            className={`relative w-full h-full rounded-2xl overflow-hidden glass-card flex items-center justify-center ${isLoadingImage ? 'skeleton-shimmer' : ''}`}
+            onClick={(e) => e.stopPropagation()}
             onWheel={handleWheel}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp} // End drag if mouse leaves
-            style={{ cursor: zoomLevel > 1 && !isDragging ? 'grab' : zoomLevel > 1 && isDragging ? 'grabbing' : 'zoom-in' }}
+            onMouseDown={selectedImage.beforeImage ? undefined : handleMouseDown}
+            onMouseMove={selectedImage.beforeImage ? undefined : handleMouseMove}
+            onMouseUp={selectedImage.beforeImage ? undefined : handleMouseUp}
+            onMouseLeave={selectedImage.beforeImage ? undefined : handleMouseUp}
+            style={{ cursor: selectedImage.beforeImage ? 'default' : (zoomLevel > 1 && !isDragging ? 'grab' : zoomLevel > 1 && isDragging ? 'grabbing' : 'zoom-in') }}
           >
-            <Image
-              src={selectedImage.image}
-              alt={selectedImage.title}
-              fill
-              className="object-contain"
-              sizes="100vw" // Image takes full width of its parent
-              priority
-              onLoad={() => setIsLoadingImage(false)}
-              style={{
-                opacity: isLoadingImage ? 0 : 1,
-                transition: 'opacity 0.3s ease-in-out',
-                transform: `scale(${zoomLevel}) translate(${imagePosition.x}px, ${imagePosition.y}px)`,
-                cursor: zoomLevel > 1 ? 'grab' : 'zoom-in', // Change cursor for grab when zoomed
-                transitionDuration: isDragging ? '0s' : '0.1s', // Smooth transition when not dragging
-              }}
-            />
-
-            {/* Text Overlay - Removed as per requirements */}
+            {selectedImage.beforeImage ? (
+              <BeforeAfterSlider
+                beforeImage={selectedImage.beforeImage}
+                afterImage={selectedImage.image}
+                alt={selectedImage.title}
+                initialPosition={sliderPosition}
+                onPositionChange={onSliderPositionChange}
+                zoomLevel={zoomLevel}
+                imagePosition={imagePosition}
+                onLoad={() => setIsLoadingImage(false)}
+                className={isLoadingImage ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}
+              />
+            ) : (
+              <Image
+                src={selectedImage.image}
+                alt={selectedImage.title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+                onLoad={() => setIsLoadingImage(false)}
+                style={{
+                  opacity: isLoadingImage ? 0 : 1,
+                  transition: 'opacity 0.3s ease-in-out',
+                  transform: `scale(${zoomLevel}) translate(${imagePosition.x}px, ${imagePosition.y}px)`,
+                  cursor: zoomLevel > 1 ? 'grab' : 'zoom-in',
+                  transitionDuration: isDragging ? '0s' : '0.1s',
+                }}
+              />
+            )}
 
             {/* Zoom Controls - Always visible for mobile */}
-            <div className="absolute top-4 left-4 z-10 flex gap-2">
+            <div className="absolute top-4 left-4 z-20 flex gap-2">
               <button
                 onClick={(e) => { e.stopPropagation(); setZoomLevel(prev => Math.max(1, prev - 0.5)); setImagePosition({x:0, y:0}); }}
                 className="w-8 h-8 rounded-full glass hover:bg-primary/20 flex items-center justify-center transition-colors"

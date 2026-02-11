@@ -7,12 +7,14 @@ import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ArrowRight, Eye } from "lucide-react"
 import { galleryItems, showcaseSectionContent } from "@/lib/data"
 import { Button } from "@/components/ui/button"
-import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
+import { Lightbox } from "@/components/lightbox"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 export function ShowcaseSection() {
   const ref = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedImage, setSelectedImage] = React.useState<typeof galleryItems[0] | null>(null)
+  const [sliderPositions, setSliderPositions] = React.useState<Record<number, number>>({})
 
   // Take first 6 items for the showcase
   const showcaseItems = galleryItems.slice(0, 6)
@@ -93,17 +95,28 @@ export function ShowcaseSection() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className={`${sizes[index]} relative group cursor-pointer`}
-                onClick={() => { setSelectedImage(item); }}
+                onClick={item.beforeImage ? undefined : () => setSelectedImage(item)}
               >
                 <div className="absolute inset-0 rounded-2xl overflow-hidden border border-primary skeleton-shimmer">
-                  {/* Project Image */}
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                  />
+                  {/* Project Image or Before/After Slider */}
+                  {item.beforeImage ? (
+                    <BeforeAfterSlider
+                      beforeImage={item.beforeImage}
+                      afterImage={item.image}
+                      alt={item.title}
+                      initialPosition={sliderPositions[item.id] ?? 50}
+                      onPositionChange={(pos) => setSliderPositions(prev => ({ ...prev, [item.id]: pos }))}
+                      onImageClick={() => setSelectedImage(item)}
+                    />
+                  ) : (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                    />
+                  )}
 
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
@@ -180,6 +193,8 @@ export function ShowcaseSection() {
         onNext={handleNext}
         currentIndex={currentIndex}
         totalImages={showcaseItems.length}
+        sliderPosition={selectedImage ? sliderPositions[selectedImage.id] ?? 50 : 50}
+        onSliderPositionChange={(pos) => selectedImage && setSliderPositions(prev => ({ ...prev, [selectedImage.id]: pos }))}
       />
     </section>
   )
