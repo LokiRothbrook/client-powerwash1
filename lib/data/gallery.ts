@@ -82,18 +82,25 @@ export interface GalleryItem {
  *   You can use different categories to allow for filtering in the gallery page.
  */
 export const galleryItems: GalleryItem[] = [
-  { id: 1, title: "Colonial Home Restoration", category: "House Washing", image: "/gallery/project-1.svg", beforeImage: "/gallery/project-1-before.svg", description: "Complete exterior cleaning of a two-story colonial home, removing years of algae and grime" },
-  { id: 2, title: "Driveway Transformation", category: "Concrete Cleaning", image: "/gallery/project-2.svg", beforeImage: "/gallery/project-2-before.svg", description: "Oil stain and tire mark removal from a concrete driveway, restoring original appearance" },
-  { id: 3, title: "Ranch Style Home", category: "House Washing", image: "/gallery/project-3.svg", beforeImage: "/gallery/project-3-before.svg", description: "Soft wash cleaning of vinyl siding with mold and mildew removal" },
-  { id: 4, title: "Cedar Deck Revival", category: "Deck Cleaning", image: "/gallery/project-4.svg", beforeImage: "/gallery/project-4-before.svg", description: "Weathered cedar deck restored to natural wood color, ready for sealing" },
-  { id: 5, title: "Patio Stone Cleaning", category: "Concrete Cleaning", image: "/gallery/project-5.svg", beforeImage: "/gallery/project-5-before.svg", description: "Flagstone patio deep cleaned, removing embedded dirt and moss" },
-  { id: 6, title: "Victorian Home Exterior", category: "House Washing", image: "/gallery/project-6.svg", beforeImage: "/gallery/project-6-before.svg", description: "Gentle cleaning of historic Victorian home with detailed trim work" },
-  { id: 7, title: "Composite Deck Cleaning", category: "Deck Cleaning", image: "/gallery/project-7.svg", beforeImage: "/gallery/project-7-before.svg", description: "Trex composite deck cleaned and restored to like-new condition" },
-  { id: 8, title: "Sidewalk & Walkway", category: "Concrete Cleaning", image: "/gallery/project-8.svg", beforeImage: "/gallery/project-8-before.svg", description: "Residential sidewalk and walkway cleaning with edge detail work" },
-  { id: 9, title: "Cape Cod Home", category: "House Washing", image: "/gallery/project-9.svg", beforeImage: "/gallery/project-9-before.svg", description: "Full exterior wash including soffits and gutters on a Cape Cod style home" },
-  { id: 10, title: "Pool Deck Restoration", category: "Deck Cleaning", image: "/gallery/project-10.svg", beforeImage: "/gallery/project-10-before.svg", description: "Concrete pool deck cleaned and treated for algae prevention" },
-  { id: 11, title: "Commercial Storefront", category: "Commercial", image: "/gallery/project-11.svg", beforeImage: "/gallery/project-11-before.svg", description: "Retail storefront and sidewalk cleaning for a local business" },
-  { id: 12, title: "Parking Lot Cleaning", category: "Commercial", image: "/gallery/project-12.svg", beforeImage: "/gallery/project-12-before.svg", description: "Commercial parking lot deep cleaning with oil stain treatment" }
+  // House Washing
+  { id: 1, title: "Dormer Window Home Exterior", category: "House Washing", image: "/gallery/home1-after.png", beforeImage: "/gallery/home1-before.png", description: "Complete exterior cleaning of classic home with decorative dormers, removing dirt and algae buildup" },
+  { id: 2, title: "Vinyl Siding Restoration", category: "House Washing", image: "/gallery/home2-after.png", beforeImage: "/gallery/home2-before.png", description: "Deep cleaning of vinyl siding to remove years of grime, mold, and environmental staining" },
+  { id: 3, title: "Residential Exterior Refresh", category: "House Washing", image: "/gallery/home3-after.png", beforeImage: "/gallery/home3-before.png", description: "Full house wash bringing back the original beauty of the siding and trim" },
+  { id: 4, title: "Home Siding Deep Clean", category: "House Washing", image: "/gallery/home4-after.png", beforeImage: "/gallery/home4-before.png", description: "Professional soft wash removing mildew and oxidation from exterior surfaces" },
+  // Gutter Cleaning
+  { id: 5, title: "Aluminum Gutter Brightening", category: "Gutter Cleaning", image: "/gallery/gutter1-after.png", beforeImage: "/gallery/gutter1-before.png", description: "Removal of black streaks and oxidation from aluminum gutters, restoring like-new appearance" },
+  { id: 6, title: "Gutter Face Restoration", category: "Gutter Cleaning", image: "/gallery/gutter2-after.png", beforeImage: "/gallery/gutter2-before.png", description: "Deep cleaning of gutter exteriors to eliminate tiger striping and environmental staining" },
+  { id: 7, title: "Seamless Gutter Revival", category: "Gutter Cleaning", image: "/gallery/gutter3-after.png", beforeImage: "/gallery/gutter3-before.png", description: "Professional gutter brightening service removing years of buildup and discoloration" },
+  { id: 8, title: "Gutter System Detailing", category: "Gutter Cleaning", image: "/gallery/gutter4-after.png", beforeImage: "/gallery/gutter4-before.png", description: "Complete gutter exterior cleaning enhancing curb appeal and home appearance" },
+  // Deck Cleaning
+  { id: 9, title: "Wooden Walkway Revival", category: "Deck Cleaning", image: "/gallery/deck1-after.png", beforeImage: "/gallery/deck1-before.png", description: "Pressure washing of wooden deck walkway, removing weathered gray wood and restoring natural color" },
+  { id: 10, title: "Backyard Deck Restoration", category: "Deck Cleaning", image: "/gallery/deck2-after.png", beforeImage: "/gallery/deck2-before.png", description: "Full deck cleaning with railing detail work, ready for staining or sealing" },
+  // Camper/RV Washing
+  { id: 11, title: "Travel Trailer Exterior Wash", category: "Camper/RV Washing", image: "/gallery/camper1-after.png", beforeImage: "/gallery/camper1-before.png", description: "Complete exterior cleaning of travel trailer, removing road grime and oxidation" },
+  { id: 12, title: "RV Deep Cleaning", category: "Camper/RV Washing", image: "/gallery/camper2-after.png", beforeImage: "/gallery/camper2-before.png", description: "Thorough RV wash restoring shine and removing built-up dirt from extended travel" },
+  // Vehicle Washing
+  { id: 13, title: "Commercial Van Detailing", category: "Vehicle Washing", image: "/gallery/vehicle1-after.png", beforeImage: "/gallery/vehicle1-before.png", description: "Professional cleaning of work vehicle roof and exterior, removing heavy grime buildup" },
+  { id: 14, title: "Fleet Vehicle Wash", category: "Vehicle Washing", image: "/gallery/vehicle2-after.png", beforeImage: "/gallery/vehicle2-before.png", description: "Thorough exterior wash for commercial vehicles, maintaining a professional appearance" }
 ]
 
 // ============================================================================

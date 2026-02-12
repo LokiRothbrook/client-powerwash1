@@ -18,7 +18,7 @@ const categories = ["All", ...Array.from(new Set(galleryItems.map(item => item.c
 export default function GalleryPageClient() {
   const [selectedCategory, setSelectedCategory] = React.useState("All")
   const [selectedImage, setSelectedImage] = React.useState<typeof galleryItems[0] | null>(null)
-  const [visibleCount, setVisibleCount] = React.useState(12)
+  const [visibleCount, setVisibleCount] = React.useState(10)
   const [sliderPositions, setSliderPositions] = React.useState<Record<number, number>>({})
 
   // Memoize filtered items to prevent recalculation on every render
@@ -108,7 +108,7 @@ export default function GalleryPageClient() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => { setSelectedCategory(category); setVisibleCount(12); }}
+                  onClick={() => { setSelectedCategory(category); setVisibleCount(10); }}
                   className={`
                     px-5 py-2.5 rounded-full text-sm font-medium transition-all
                     ${selectedCategory === category
@@ -212,7 +212,7 @@ export default function GalleryPageClient() {
               <div className="text-center mt-12">
                 <Button
                   size="lg"
-                  onClick={() => setVisibleCount(prev => prev + 12)}
+                  onClick={() => setVisibleCount(prev => prev + 5)}
                 >
                   Load More ({filteredItems.length - visibleCount} remaining)
                 </Button>

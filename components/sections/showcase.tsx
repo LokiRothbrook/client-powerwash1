@@ -80,12 +80,12 @@ export function ShowcaseSection() {
           {showcaseItems.map((item, index) => {
             // Create varied sizes for bento effect
             const sizes = [
-              "col-span-2 row-span-2",
-              "col-span-1 row-span-1",
-              "col-span-1 row-span-1",
-              "col-span-1 row-span-2",
-              "col-span-1 row-span-1",
-              "col-span-2 row-span-1",
+              "col-span-2 row-span-2",  // Item 1: Large square (top-left)
+              "col-span-2 row-span-1",  // Item 2: Wide rectangle (bottom-left)
+              "col-span-1 row-span-2",  // Item 3: Tall rectangle (middle-right)
+              "col-span-1 row-span-1",  // Item 4: Small square
+              "col-span-2 row-span-1",  // Item 5: Wide rectangle (top-right)
+              "col-span-1 row-span-1",  // Item 6: Small square (bottom-right)
             ]
 
             return (
