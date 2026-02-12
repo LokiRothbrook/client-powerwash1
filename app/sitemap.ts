@@ -14,8 +14,7 @@ interface StaticPageConfigItem {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Last content update date (based on file modification times)
-  const lastContentUpdate = new Date('2026-01-25');
+  const lastContentUpdate = new Date();
 
   const staticPagesConfig: StaticPageConfigItem[] = [
     { url: BASE_URL, lastModified: lastContentUpdate, changeFrequency: 'weekly', priority: 1, condition: true },
@@ -24,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/pricing`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.pricing.enabled },
     { url: `${BASE_URL}/faq`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.7, condition: siteConfig.pages.faq.enabled },
     { url: `${BASE_URL}/about`, lastModified: lastContentUpdate, changeFrequency: 'monthly', priority: 0.8, condition: siteConfig.pages.about.enabled },
+    { url: `${BASE_URL}/privacy-policy`, lastModified: lastContentUpdate, changeFrequency: 'yearly', priority: 0.3, condition: true },
+    { url: `${BASE_URL}/terms-of-service`, lastModified: lastContentUpdate, changeFrequency: 'yearly', priority: 0.3, condition: true },
   ];
 
   const staticPages: MetadataRoute.Sitemap = staticPagesConfig

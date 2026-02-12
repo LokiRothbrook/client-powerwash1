@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: pricingPageContent.title,
   description: pricingPageContent.description,
+  openGraph: {
+    url: '/pricing',
+  },
 };
 
 export default function PricingPage() {

@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, Leaf } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { heroSectionContent } from "@/lib/data"
@@ -97,133 +97,142 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0.6, 1], [1, 0])
 
   return (
-    // Main section for the hero component, covering the full viewport height.
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative overflow-hidden"
     >
-      {/* Renders the animated rain/water background elements. */}
-      <RainBackground />
+      {/* Image Hero Area */}
+      <div className="relative min-h-screen flex items-center justify-center bg-[oklch(0.14_0.02_230)]">
+        {/* Background Image */}
+        <Image
+          src="/branding/cover.png"
+          alt="Professional pressure washing services"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Animated Particles */}
+        <RainBackground />
 
-      {/* Main content wrapper, applies parallax 'y' and fade 'opacity' animations. */}
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        {/* Main Hero Content - Title, subtitle, and primary/secondary call-to-action buttons. */}
-        <div className="text-center mb-16">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }} // Initial animation state (hidden, slightly below)
-            animate={{ opacity: 1, y: 0 }} // Animation target (visible, at original position)
-            transition={{ duration: 0.6, delay: 0.1 }} // Animation properties
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
-          >
-            <span className="block gradient-text">{heroSectionContent.title.line1}</span>
-            <span className="block gradient-text">{heroSectionContent.title.line2}</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
-          >
-            {heroSectionContent.subtitle}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            {/* Primary CTA Button */}
-            <Button asChild size="lg" className="text-base px-8 glow-blue">
-              <Link href={heroSectionContent.buttons.primary.href}>
-                {heroSectionContent.buttons.primary.text}
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
-            {/* Secondary CTA Button */}
-            <Button asChild variant="outline" size="lg" className="text-base px-8 glass">
-              <Link href={heroSectionContent.buttons.secondary.href}>
-                {heroSectionContent.buttons.secondary.text}
-              </Link>
-            </Button>
-          </motion.div>
-
-          {/* Trust Badges - Displaying key assurances like "Fully Insured", "Licensed Pros". */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex items-center justify-center gap-8 mt-12 text-sm text-muted-foreground"
-          >
-            {heroSectionContent.trustBadges.map((badge, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <badge.icon className="w-5 h-5 text-primary" />
-                <span>{badge.text}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Hero Cards Grid - Displays feature/service highlights in a grid layout. */}
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          {heroSectionContent.heroCards.map((card, index) => (
-            <motion.div
-              key={card.id}
-              initial={{ opacity: 0, y: 40 }} // Cards initially hidden and slightly below their final position.
-              animate={{ opacity: 1, y: 0 }} // Animate to full opacity and correct vertical position.
-              transition={{ duration: 0.6, delay: 0.4 + card.delay }} // Staggered animation delay.
-              whileHover={{ y: -8, scale: 1.02 }} // Interactive hover effect.
-              className="group relative"
+        {/* Main Content */}
+        <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-48">
+          <div className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
             >
-              {/* Decorative background blur on hover. */}
-              <div className={`
-                absolute inset-0 rounded-2xl bg-primary/20 opacity-0
-                group-hover:opacity-100 blur-xl transition-opacity duration-500
-              `} />
-              {/* Card content wrapper. */}
-              <div className={`
-                relative h-full p-8 rounded-2xl
-                ${card.cardClass}
-                overflow-hidden
-                ${index === 1 ? 'md:-mt-4 md:mb-4' : ''} // Styling adjustment for the middle card.
-              `}>
-                {/* Shimmer Effect for visual flair on hover. */}
-                <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Image
+                src="/branding/logo-transparent.png"
+                alt="Pike Pressure Washing Logo"
+                width={500}
+                height={300}
+                className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto h-auto"
+                priority
+              />
+            </motion.h1>
 
-                {/* Individual Card Content */}
-                <div className="relative z-10">
-                  {/* Card Icon */}
-                  <div className={`
-                    w-14 h-14 rounded-xl bg-primary/20
-                    flex items-center justify-center mb-6
-                    group-hover:scale-110 transition-transform duration-300
-                  `}>
-                    {(() => {
-                      const Icon = card.icon; // card.icon is already the component
-                      return Icon ? <Icon className="w-7 h-7 text-primary" /> : null;
-                    })()}
-                  </div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl text-white font-medium max-w-2xl w-fit mx-auto mb-8 px-6 py-3 rounded-2xl backdrop-blur-md bg-black/20 border border-primary"
+            >
+              {heroSectionContent.subtitle}
+            </motion.p>
 
-                  {/* Card Title and Subtitle */}
-                  <p className="text-sm text-primary font-medium mb-2">{card.subtitle}</p>
-                  <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-                  <p className="text-muted-foreground mb-6">{card.description}</p>
-
-                  {/* Call to action within the card. */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-primary">{card.stats}</span>
-                  </div>
-                </div>
-
-                {/* Decorative background elements within the card. */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-full" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-full" />
-              </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Button asChild size="lg" className="group text-base px-8 glow-blue">
+                <Link href={heroSectionContent.buttons.primary.href}>
+                  {heroSectionContent.buttons.primary.text}
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" className="group text-base px-8 glow-blue">
+                <Link href={heroSectionContent.buttons.secondary.href}>
+                  {heroSectionContent.buttons.secondary.text}
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
             </motion.div>
-          ))}
+            {/* Trust Badges - Displaying key assurances like "Fully Insured", "Licensed Pros". */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex items-center justify-center gap-8 mt-12 text-sm text-muted-foreground"
+            >
+              {heroSectionContent.trustBadges.map((badge, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <badge.icon className="w-5 h-5 text-primary" />
+                  <span>{badge.text}</span>
+                </div>
+              ))}
+          </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Hero Cards Section */}
+      <div className="relative bg-background water-pattern">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid md:grid-cols-3 gap-6">
+            {heroSectionContent.heroCards.map((card, index) => (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 + card.delay }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative"
+              >
+                <div className={`
+                  absolute inset-0 rounded-2xl bg-primary/20 opacity-0
+                  group-hover:opacity-100 blur-xl transition-opacity duration-500
+                `} />
+                <div className={`
+                  relative h-full p-8 rounded-2xl
+                  ${card.cardClass}
+                  overflow-hidden
+                  ${index === 1 ? 'md:-mt-4 md:mb-4' : ''}
+                `}>
+                  <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <div className="relative z-10">
+                    <div className={`
+                      w-14 h-14 rounded-xl bg-primary/20
+                      flex items-center justify-center mb-6
+                      group-hover:scale-110 transition-transform duration-300
+                    `}>
+                      {(() => {
+                        const Icon = card.icon;
+                        return Icon ? <Icon className="w-7 h-7 text-primary" /> : null;
+                      })()}
+                    </div>
+
+                    <p className="text-sm text-primary font-medium mb-2">{card.subtitle}</p>
+                    <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
+                    <p className="text-muted-foreground mb-6">{card.description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-primary">{card.stats}</span>
+                    </div>
+                  </div>
+
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-full" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-full" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

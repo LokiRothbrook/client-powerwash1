@@ -161,8 +161,8 @@
   --destructive: oklch(0.65 0.2 25); /* Color for destructive actions or errors */
 
   /* Border and Input Colors */
-  --border: oklch(0.28 0.035 230); /* Default border color */
-  --input: oklch(0.28 0.035 230); /* Input field border/background color */
+  --border: oklch(0.55 0.2 220 / 0.3); /* Default border color - blue tint */
+  --input: oklch(0.55 0.2 220 / 0.3); /* Input field border/background color */
 
    /* Ring Color (for focus states) */
   --ring: oklch(0.65 0.15 220); /* Color for focus rings/outlines */
@@ -275,13 +275,13 @@
 .glass {
   background: oklch(0.18 0.025 230 / 0.6);
   backdrop-filter: blur(20px);
-  border: 1px solid oklch(0.65 0.15 220 / 0.15);
+  border: 1px solid oklch(0.55 0.2 220 / 0.3);
 }
 
 .glass-card {
   background: oklch(0.16 0.02 230 / 0.7);
   backdrop-filter: blur(16px);
-  border: 1px solid oklch(0.65 0.15 220 / 0.1);
+  border: 1px solid oklch(0.55 0.2 220 / 0.3);
 }
 
 /*
@@ -523,6 +523,21 @@
   animation-play-state: paused; /* Pause marquee on hover */
 }
 
+/* Skeleton loading shimmer for image placeholders */
+.skeleton-shimmer {
+  background-color: oklch(0.18 0.025 230);
+  background-image: linear-gradient(
+    90deg,
+    oklch(0.18 0.025 230) 0%,
+    oklch(0.24 0.03 230) 40%,
+    oklch(0.24 0.03 230) 60%,
+    oklch(0.18 0.025 230) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  will-change: background-position;
+}
+
 /*
 * Hero Card Gradient Backgrounds
 *
@@ -541,7 +556,7 @@
     oklch(0.25 0.05 225 / 0.8) 100%
   );
   backdrop-filter: blur(20px);
-  border: 1px solid oklch(0.65 0.15 220 / 0.2);
+  border: 1px solid oklch(0.55 0.2 220 / 0.3);
 }
 
 .hero-card-2 {
@@ -550,7 +565,7 @@
     oklch(0.18 0.05 200 / 0.8) 100%
   );
   backdrop-filter: blur(20px);
-  border: 1px solid oklch(0.55 0.12 200 / 0.25);
+  border: 1px solid oklch(0.55 0.2 220 / 0.3);
 }
 
 .hero-card-3 {
@@ -559,7 +574,7 @@
     oklch(0.22 0.04 240 / 0.8) 100%
   );
   backdrop-filter: blur(20px);
-  border: 1px solid oklch(0.60 0.10 235 / 0.2);
+  border: 1px solid oklch(0.55 0.2 220 / 0.3);
 }
 
 /*

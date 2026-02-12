@@ -48,12 +48,24 @@ import { Shield, Award, Clock, Sparkles } from "lucide-react"; // Only for hero 
  * - Replace all placeholder strings with your actual business information.
  */
 export const companyInfo = {
-  name: "PowerWash Pro",
-  tagline: "The Pittsfield Area's premier power washing company. Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
+  name: "Pike Pressure Washing",
+  tagline: "The Pittsfield Area's premier power washing company",
   phone: "(555) 123-4567",
   email: "contact@powerwashpro.com",
   address: "123 Main Street, Pittsfield, MA 01201",
   hours: "Mon-Fri: 7AM-6PM | Sat: 8AM-4PM",
+  // Location and SEO fields
+  location: {
+    city: "Pittsfield",
+    state: "IL",
+    zip: "62363",
+    streetAddress: "Serving Pittsfield and surrounding areas",
+  },
+  serviceAreas: ["Pittsfield, IL"],
+  serviceAreaDescription: "Pittsfield, IL",
+  priceRange: "$150-$500",
+  openingHoursSchema: ["Mo-Fr 08:00-17:00"],
+  foundingYear: 2020,
 };
 
 // ============================================================================
@@ -113,25 +125,26 @@ export const siteConfig = {
   socialMedia: {
     facebook: {
       enabled: true,
-      href: "https://www.facebook.com/share/powerwashpro",
+      href: "",
     },
     instagram: {
-      enabled: false,
-      href: "https://instagram.com/powerwashpro",
+      enabled: true,
+      href: "",
     },
     x: {
-      enabled: false,
-      href: "https://x.com/powerwashpro",
+      enabled: true,
+      href: "",
     },
     youtube: {
-      enabled: false,
-      href: "https://youtube.com/@powerwashpro",
+      enabled: true,
+      href: "",
     },
   },
   // Header and footer display toggles
   showPhoneNumber: true,
   showMapIcon: true, // Set to false as requested
   showGetFreeQuoteButton: true,
+  showStarsOnServicePage: true,
 };
 
 // ============================================================================
@@ -194,7 +207,7 @@ export const headerContent = {
  *   very bottom bar of the footer (e.g., Privacy Policy, Terms of Service).
  */
 export const footerContent = {
-  taglineSuffix: "The Pittsfield Area's premier power washing company. Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
+  taglineSuffix: "Professional pressure washing for homes, driveways, decks, roofs & commercial properties. Get your free quote today!",
   columns: {
     services: {
       title: "Our Services",
@@ -204,7 +217,7 @@ export const footerContent = {
       title: "Quick Links",
       links: [
         { label: "Home", href: "/#" },
-        { label: "About Us", href: "/#about" },
+        { label: "About Us", href: "/about" },
         { label: "Pricing", href: "/pricing" },
         { label: "Gallery", href: "/gallery" },
         { label: "Testimonials", href: "/#testimonials" },
@@ -271,10 +284,7 @@ export const callToActionSectionContent = {
  *   within or near the hero section.
  */
 export const heroSectionContent = {
-  title: {
-    line1: "Professional Powerwashing",
-    line2: "Services"
-  },
+
   subtitle: "Restore your property's beauty with the Pittsfield Area's premier power washing service. From homes to businesses, we deliver spotless results every time.",
   buttons: {
     primary: {

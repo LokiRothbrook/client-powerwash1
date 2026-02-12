@@ -26,6 +26,13 @@ import { Users, Trophy, Sparkles, ThumbsUp } from "lucide-react";
 // About Section Content
 // ============================================================================
 
+export const aboutPageContent = {
+  pageHeader: {
+    title: "About Us",
+    subtitle: "Our story, values, and commitment to your property.",
+  },
+};
+
 export const aboutSectionContent = {
   sectionTitle: "About Us",
   title: {
@@ -33,12 +40,12 @@ export const aboutSectionContent = {
     line2: "Power Washing Experts"
   },
   paragraphs: [
-    "Since 2015, PowerWash Pro has been restoring properties to their original beauty throughout the Pittsfield area. What started as a one-truck operation has grown into the region's most trusted power washing company.",
+    "Since 2015, Pike Pressure Washing has been restoring properties to their original beauty throughout the Pittsfield area. What started as a one-truck operation has grown into the region's most trusted power washing company.",
     "Our team of trained professionals uses state-of-the-art equipment and eco-friendly cleaning solutions to deliver results that exceed expectations. We treat every property like our own, because your satisfaction is our success."
   ],
   image: {
     /** Path to the about section image. Set to null to use the animated visual instead. */
-    src: "/branding/aboutus-placeholder.webp",
+    src: "/branding/about_us.webp",
     /** The main number/stat displayed prominently (e.g., "10+" for years) */
     year: "10+",
     /** First line of text below the year (e.g., "Years of Excellence") */

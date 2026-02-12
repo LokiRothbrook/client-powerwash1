@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/sections/hero"
 import { ServicesSection } from "@/components/sections/services"
@@ -6,7 +7,15 @@ import { ShowcaseSection } from "@/components/sections/showcase"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { ContactSection } from "@/components/sections/contact"
 import { Footer } from "@/components/footer"
-import { siteConfig } from "@/lib/data"
+import { siteConfig, companyInfo, seoConfig } from "@/lib/data"
+
+export const metadata: Metadata = {
+  title: `${companyInfo.name} | ${seoConfig.titleSuffix}`,
+  description: seoConfig.pages.home.description,
+  openGraph: {
+    url: '/',
+  },
+}
 
 export default function HomePage() {
   return (

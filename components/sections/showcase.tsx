@@ -4,15 +4,17 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, Eye, X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
+import { ArrowRight, Eye } from "lucide-react"
 import { galleryItems, showcaseSectionContent } from "@/lib/data"
 import { Button } from "@/components/ui/button"
-import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
+import { Lightbox } from "@/components/lightbox"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 export function ShowcaseSection() {
   const ref = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedImage, setSelectedImage] = React.useState<typeof galleryItems[0] | null>(null)
+  const [sliderPositions, setSliderPositions] = React.useState<Record<number, number>>({})
 
   // Take first 6 items for the showcase
   const showcaseItems = galleryItems.slice(0, 6)
@@ -69,16 +71,21 @@ export function ShowcaseSection() {
         </div>
 
         {/* Bento Grid Layout */}
+        {showcaseItems.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-lg text-muted-foreground">Our project gallery is being updated. Check back soon to see our latest work.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
           {showcaseItems.map((item, index) => {
             // Create varied sizes for bento effect
             const sizes = [
-              "col-span-2 row-span-2",
-              "col-span-1 row-span-1",
-              "col-span-1 row-span-1",
-              "col-span-1 row-span-2",
-              "col-span-1 row-span-1",
-              "col-span-2 row-span-1",
+              "col-span-2 row-span-2",  // Item 1: Large square (top-left)
+              "col-span-2 row-span-1",  // Item 2: Wide rectangle (bottom-left)
+              "col-span-1 row-span-2",  // Item 3: Tall rectangle (middle-right)
+              "col-span-1 row-span-1",  // Item 4: Small square
+              "col-span-2 row-span-1",  // Item 5: Wide rectangle (top-right)
+              "col-span-1 row-span-1",  // Item 6: Small square (bottom-right)
             ]
 
             return (
@@ -88,20 +95,28 @@ export function ShowcaseSection() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className={`${sizes[index]} relative group cursor-pointer`}
-                onClick={() => { setSelectedImage(item); }}
+                onClick={item.beforeImage ? undefined : () => setSelectedImage(item)}
               >
-                <div className="absolute inset-0 rounded-2xl overflow-hidden glass-card">
-                  {/* Project Image */}
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+                <div className="absolute inset-0 rounded-2xl overflow-hidden border border-primary skeleton-shimmer">
+                  {/* Project Image or Before/After Slider */}
+                  {item.beforeImage ? (
+                    <BeforeAfterSlider
+                      beforeImage={item.beforeImage}
+                      afterImage={item.image}
+                      alt={item.title}
+                      initialPosition={sliderPositions[item.id] ?? 50}
+                      onPositionChange={(pos) => setSliderPositions(prev => ({ ...prev, [item.id]: pos }))}
+                      onImageClick={() => setSelectedImage(item)}
+                    />
+                  ) : (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                    />
+                  )}
 
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
@@ -136,8 +151,8 @@ export function ShowcaseSection() {
                     <motion.div
                       className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                     >
-                      <div className="bg-white/80 py-2 px-4 rounded-lg w-fit">
-                        <h3 className="text-primary text-lg sm:text-xl font-bold">
+                      <div className="backdrop-blur-md bg-black/20 border border-primary/30 py-2 px-4 rounded-2xl w-fit">
+                        <h3 className="text-white text-lg sm:text-xl font-bold">
                           {item.title}
                         </h3>
                       </div>
@@ -145,12 +160,13 @@ export function ShowcaseSection() {
                   </div>
 
                   {/* Border Glow Effect */}
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/10 group-hover:ring-primary/50 transition-all duration-300" />
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-primary/50 transition-all duration-300" />
                 </div>
               </motion.div>
             )
           })}
         </div>
+        )}
 
         {/* CTA */}
         <motion.div
@@ -177,6 +193,8 @@ export function ShowcaseSection() {
         onNext={handleNext}
         currentIndex={currentIndex}
         totalImages={showcaseItems.length}
+        sliderPosition={selectedImage ? sliderPositions[selectedImage.id] ?? 50 : 50}
+        onSliderPositionChange={(pos) => selectedImage && setSliderPositions(prev => ({ ...prev, [selectedImage.id]: pos }))}
       />
     </section>
   )

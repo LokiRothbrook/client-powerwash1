@@ -6,7 +6,10 @@ import { aboutSectionContent } from "@/lib/data"; // Using content for metadata
 
 export const metadata: Metadata = {
   title: aboutSectionContent.sectionTitle,
-  description: aboutSectionContent.paragraphs[0], // Using the first paragraph as description
+  description: aboutSectionContent.paragraphs[0],
+  openGraph: {
+    url: '/about',
+  },
 };
 
 export default function AboutPage() {

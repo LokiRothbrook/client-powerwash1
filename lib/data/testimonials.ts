@@ -95,7 +95,7 @@ export const testimonials: Testimonial[] = [
     id: 1,
     name: "Sarah Mitchell",
     role: "Homeowner",
-    content: "I couldn't believe the difference! My vinyl siding looked brand new after PowerWash Pro cleaned it. The green algae that had been building up for years was completely gone. Highly recommend!",
+    content: "I couldn't believe the difference! My vinyl siding looked brand new after Pike Pressure Washing cleaned it. The green algae that had been building up for years was completely gone. Highly recommend!",
     rating: 5,
     image: "/testimonials/client-1.jpg",
     link: "#"
@@ -104,7 +104,7 @@ export const testimonials: Testimonial[] = [
     id: 2,
     name: "Mike Thompson",
     role: "Property Manager",
-    content: "We use PowerWash Pro for all 12 of our rental properties. They're reliable, professional, and their pricing is fair. The tenants always comment on how great the buildings look after cleaning.",
+    content: "We use Pike Pressure Washing for all 12 of our rental properties. They're reliable, professional, and their pricing is fair. The tenants always comment on how great the buildings look after cleaning.",
     rating: 5,
     image: "/testimonials/client-2.jpg",
     link: "#"
@@ -113,7 +113,7 @@ export const testimonials: Testimonial[] = [
     id: 3,
     name: "Jennifer Davis",
     role: "Homeowner",
-    content: "Our driveway had oil stains that we thought would never come out. PowerWash Pro made it look like we just had new concrete poured. Amazing transformation!",
+    content: "Our driveway had oil stains that we thought would never come out. Pike Pressure Washing made it look like we just had new concrete poured. Amazing transformation!",
     rating: 5,
     image: "/testimonials/client-3.jpg",
     link: "#"
@@ -140,7 +140,7 @@ export const testimonials: Testimonial[] = [
     id: 6,
     name: "David Wilson",
     role: "Homeowner",
-    content: "Been using PowerWash Pro for three years now. They come out every spring to clean our house and driveway. Consistent quality every single time. Wouldn't trust anyone else.",
+    content: "Been using Pike Pressure Washing for three years now. They come out every spring to clean our house and driveway. Consistent quality every single time. Wouldn't trust anyone else.",
     rating: 5,
     image: "/testimonials/client-6.jpg",
     link: "#"
@@ -158,7 +158,7 @@ export const testimonials: Testimonial[] = [
     id: 8,
     name: "James Martinez",
     role: "Business Owner",
-    content: "Our storefront and sidewalk needed serious help. PowerWash Pro transformed our curb appeal completely. We've had customers comment on how clean everything looks now.",
+    content: "Our storefront and sidewalk needed serious help. Pike Pressure Washing transformed our curb appeal completely. We've had customers comment on how clean everything looks now.",
     rating: 5,
     image: "/testimonials/client-8.jpg",
     link: "#"

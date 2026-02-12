@@ -111,7 +111,39 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { firstName, lastName, email, phone, service, message } = body
+    const { firstName, lastName, email, phone, service, message, turnstileToken } = body
+
+    // --- Turnstile Verification ---
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY
+    if (turnstileSecret) {
+      if (!turnstileToken) {
+        return NextResponse.json(
+          { error: "Verification required. Please complete the security check." },
+          { status: 400 }
+        )
+      }
+
+      const turnstileResponse = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: turnstileSecret,
+            response: turnstileToken,
+            remoteip: clientIp,
+          }),
+        }
+      )
+
+      const turnstileResult = await turnstileResponse.json()
+      if (!turnstileResult.success) {
+        return NextResponse.json(
+          { error: "Security verification failed. Please try again." },
+          { status: 403 }
+        )
+      }
+    }
 
     // --- Input Validation ---
     // 1. Validate required fields: Ensures all necessary fields are provided.

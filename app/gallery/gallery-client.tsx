@@ -3,12 +3,14 @@
 import * as React from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
+import { ZoomIn } from "lucide-react"
 import { galleryItems } from "@/lib/data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CtaSection } from "@/components/sections/cta"
-import { Lightbox } from "@/components/lightbox" // Import the new Lightbox component
+import { Lightbox } from "@/components/lightbox"
+import { Button } from "@/components/ui/button"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 // Memoized outside component since galleryItems is static
 const categories = ["All", ...Array.from(new Set(galleryItems.map(item => item.category)))]
@@ -16,6 +18,8 @@ const categories = ["All", ...Array.from(new Set(galleryItems.map(item => item.c
 export default function GalleryPageClient() {
   const [selectedCategory, setSelectedCategory] = React.useState("All")
   const [selectedImage, setSelectedImage] = React.useState<typeof galleryItems[0] | null>(null)
+  const [visibleCount, setVisibleCount] = React.useState(10)
+  const [sliderPositions, setSliderPositions] = React.useState<Record<number, number>>({})
 
   // Memoize filtered items to prevent recalculation on every render
   const filteredItems = React.useMemo(
@@ -24,6 +28,9 @@ export default function GalleryPageClient() {
       : galleryItems.filter(item => item.category === selectedCategory),
     [selectedCategory]
   )
+
+  const visibleItems = filteredItems.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredItems.length
 
   const currentIndex = selectedImage ? filteredItems.findIndex(item => item.id === selectedImage.id) : -1
 
@@ -54,11 +61,12 @@ export default function GalleryPageClient() {
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main className="pt-15">
         {/* Hero Section */}
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative p-5 overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 water-pattern" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-accent/10" />
           <motion.div
             className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[150px]"
             animate={{ scale: [1, 1.2, 1] }}
@@ -72,7 +80,7 @@ export default function GalleryPageClient() {
               transition={{ delay: 0.1 }}
               className="text-5xl sm:text-6xl font-bold mb-6"
             >
-              <span className="gradient-text">Project Gallery</span>
+              <span className="gradient-text">Before & After Results</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -87,8 +95,9 @@ export default function GalleryPageClient() {
         </section>
 
         {/* Filter & Gallery */}
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-12 relative">
+          <div className="absolute inset-0 water-pattern" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Category Filter */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -99,7 +108,7 @@ export default function GalleryPageClient() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => { setSelectedCategory(category); setVisibleCount(10); }}
                   className={`
                     px-5 py-2.5 rounded-full text-sm font-medium transition-all
                     ${selectedCategory === category
@@ -118,8 +127,17 @@ export default function GalleryPageClient() {
               layout
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
+              {filteredItems.length === 0 ? (
+                <div className="col-span-full text-center py-16">
+                  <p className="text-lg text-muted-foreground">
+                    {galleryItems.length === 0
+                      ? "Our project gallery is being updated. Check back soon to see our latest work."
+                      : "No projects found in this category."}
+                  </p>
+                </div>
+              ) : (
               <AnimatePresence mode="popLayout">
-                {filteredItems.map((item, index) => (
+                {visibleItems.map((item, index) => (
                   <motion.div
                     key={item.id}
                     layout
@@ -131,47 +149,75 @@ export default function GalleryPageClient() {
                       relative group cursor-pointer overflow-hidden rounded-2xl
                       ${index % 5 === 0 ? 'md:col-span-2 md:row-span-2' : ''}
                     `}
-                    onClick={() => setSelectedImage(item)}
+                    onClick={item.beforeImage ? undefined : () => setSelectedImage(item)}
                   >
                     <div className={`
-                      relative w-full glass-card
+                      relative w-full border border-primary skeleton-shimmer overflow-hidden rounded-2xl
                       ${index % 5 === 0 ? 'aspect-square' : 'aspect-[4/3]'}
                     `}>
-                      {/* Project Image */}
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        sizes={index % 5 === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                      />
+                      {/* Project Image or Before/After Slider */}
+                      {item.beforeImage ? (
+                        <BeforeAfterSlider
+                          beforeImage={item.beforeImage}
+                          afterImage={item.image}
+                          alt={item.title}
+                          initialPosition={sliderPositions[item.id] ?? 50}
+                          onPositionChange={(pos) => setSliderPositions(prev => ({ ...prev, [item.id]: pos }))}
+                          onImageClick={() => setSelectedImage(item)}
+                        />
+                      ) : (
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          sizes={index % 5 === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                        />
+                      )}
 
                       {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-background/0 group-hover:bg-background/70 transition-all duration-300">
+                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-all duration-300">
                         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
                           <motion.div
                             initial={{ scale: 0 }}
                             whileHover={{ scale: 1.1 }}
-                            className="w-14 h-14 rounded-full glass flex items-center justify-center mb-4 glow-blue"
+                            className="w-14 h-14 rounded-full backdrop-blur-md bg-black/20 border border-primary/30 flex items-center justify-center mb-4"
                           >
-                            <ZoomIn className="w-7 h-7 text-primary" />
+                            <ZoomIn className="w-7 h-7 text-white" />
                           </motion.div>
-                          <h3 className="text-foreground font-semibold text-center text-lg mb-1">
-                            {item.title}
-                          </h3>
-                          <span className="text-muted-foreground text-sm">{item.category}</span>
+                          <div className="backdrop-blur-md bg-black/20 border border-primary/30 py-2 px-4 rounded-2xl">
+                            <h3 className="text-white font-semibold text-center text-lg">
+                              {item.title}
+                            </h3>
+                          </div>
                         </div>
                       </div>
 
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full glass text-primary text-xs font-medium">
+                      <div className="absolute top-4 left-4 px-3 py-1 rounded-2xl backdrop-blur-md bg-black/20 border border-primary/30 text-white text-xs font-medium">
                         {item.category}
                       </div>
+
+                      {/* Border Glow Effect */}
+                      <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-primary/50 transition-all duration-300" />
                     </div>
                   </motion.div>
                 ))}
               </AnimatePresence>
+              )}
             </motion.div>
+
+            {/* Load More Button */}
+            {hasMore && (
+              <div className="text-center mt-12">
+                <Button
+                  size="lg"
+                  onClick={() => setVisibleCount(prev => prev + 5)}
+                >
+                  Load More ({filteredItems.length - visibleCount} remaining)
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -184,6 +230,8 @@ export default function GalleryPageClient() {
           onNext={handleNext}
           currentIndex={currentIndex}
           totalImages={filteredItems.length}
+          sliderPosition={selectedImage ? sliderPositions[selectedImage.id] ?? 50 : 50}
+          onSliderPositionChange={(pos) => selectedImage && setSliderPositions(prev => ({ ...prev, [selectedImage.id]: pos }))}
         />
 
 
